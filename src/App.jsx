@@ -85,11 +85,12 @@ export default function App() {
 
   return (
     <>
-      <StaffList title="On the Job Trainees" list={staff.onTheJobTrainees} />
+      <p className='mainTitle'>DDO Attendance Helper</p>
+      <StaffList titleClass={"firstItemTitle"} title="On the Job Trainees" list={staff.onTheJobTrainees} />
       <StaffList title="Software Developers and Designers" list={staff.softwareDevelopersDesigners} />
       <StaffList title="Project Leaders" list={staff.projectLeaders} />
       <StaffList title="Reporting to CTO" list={staff.reportingToCTO} />
-      <button onClick={() => updateFinalOutput()}>Copy Attendance</button>
+      <button className="copyBtn" onClick={() => updateFinalOutput()}>Copy Attendance</button>
       <button className='destructive' onClick={() => resetStaffData()}>Reset</button>
     </>
   )

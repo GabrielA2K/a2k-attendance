@@ -42,7 +42,7 @@ export default function StaffList(stafflist) {
     
     return (
     <>
-        <p className="title">{stafflist.title}</p>
+        <p className={"title "+stafflist.titleClass}>{stafflist.title}</p>
         <p className="details">{"P = "+stafflist.list.filter(person => person.status === "P").length+" / MC = 0 / L = "+stafflist.list.filter(person => person.status === "L").length+" / TO = 0 / WFH = "+stafflist.list.filter(person => person.status === "WFH").length+" / OS = "+stafflist.list.filter(person => person.status === "OS").length}</p>
         
         {stafflist.list.map((i)=>{
@@ -52,7 +52,7 @@ export default function StaffList(stafflist) {
           
 
           return (
-            <div className="stafflist.listItemContainer">
+            <div className={"stafflist.listItemContainer "}>
               
               <div className="staffListItem">
                 <p className={"nameStatus "+status}><Icon icon={"material-symbols:circle"} height={10} width={10} className={'iconWrapper '+status}/>{i.name}</p>

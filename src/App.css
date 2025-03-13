@@ -11,12 +11,16 @@ html, body {
 #root {
   max-width: 1280px;
   margin: 0 auto;
-  padding: 2rem 1rem;
+  padding: 1rem 1rem;
   display: flex;
   gap: 0.8rem;
   flex-direction: column;
 }
-
+.mainTitle {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: hsla(39, 100%, 63%, 0.918);
+}
 .title {
   font-size: 1.5rem;
   font-weight: 500;
@@ -24,6 +28,14 @@ html, body {
   margin-bottom: 0rem;
   margin-top: 2rem;
 }
+.firstItemTitle {
+  margin-top: 0rem;
+}
+.copyBtn {
+  margin-top: 3rem;
+}
+
+
 .details {
   font-size: 1rem;
   font-weight: 400;
