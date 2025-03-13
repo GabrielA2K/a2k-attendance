@@ -1,5 +1,6 @@
+import { useState } from "react";
 
-const staffs = {
+export const staffs = {
     onTheJobTrainees: [
       { name: "Jose Elijah Tubig", status: "", timeIn: "", reason: "", leaveType: "" },
       { name: "Vien Arman L. Cabrera", status: "", timeIn: "", reason: "", leaveType: "" },
@@ -36,5 +37,3 @@ const staffs = {
       { name: "Alonzo Pamintuan", status: "", timeIn: "", reason: "", leaveType: "" }
     ]
 };
-
-export default staffs;

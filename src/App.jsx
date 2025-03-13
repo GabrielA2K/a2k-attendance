@@ -1,48 +1,26 @@
-import { useEffect, useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-import staffs from './staffs'
-import AutoLinkText from './AutoLinkText'
-import { Icon } from '@iconify/react/dist/iconify.js'
+import React, { useState } from 'react'
+import { staffs } from './staffs'
 import StaffList from './StaffList'
+import { loadData, staff, updateStaff } from './components/process/LocalStorageHandler'
+import './App.css'
 
 
 function copyToClipboard(value) {
-  
-    const textarea = document.createElement("textarea");
-    textarea.value = value;
-    textarea.style.position = "absolute";
-    textarea.style.left = "-9999px"; // Move it off-screen
+  const textarea = document.createElement("textarea");
+  textarea.value = value;
+  textarea.style.position = "absolute";
+  textarea.style.left = "-9999px"; // Move it off-screen
 
-    document.body.appendChild(textarea);
-    textarea.select();
-    try {
-      document.execCommand("copy"); // Fallback copy command
-      alert("Copied to clipboard!");
-    } catch (err) {
-      alert("Fallback copy failed:", err);
-    }
-    document.body.removeChild(textarea); // Clean up
+  document.body.appendChild(textarea);
+  textarea.select();
+  try {
+    document.execCommand("copy"); // Fallback copy command
+    alert("Copied to clipboard!");
+  } catch (err) {
+    alert("Fallback copy failed:", err);
   }
-
-let staff = null
-const loadData = () => {
-  staff = JSON.parse(localStorage.getItem("staffData")) || {};
+  document.body.removeChild(textarea); // Clean up
 }
-
-export const saveData = () => {
-  if (staff === null) {
-    localStorage.setItem("staffData", JSON.stringify(staffs));
-  } else {
-    localStorage.setItem("staffData", JSON.stringify(staff));
-  }
-}
-
-// function updateData() {
-//   saveData()
-//   loadData()
-// }
 
 function initializeLocalStaffData() {
   if (!localStorage.getItem("staffData")) {
@@ -50,26 +28,23 @@ function initializeLocalStaffData() {
   }
 }
 
+
+
 initializeLocalStaffData()
-loadData()
+updateStaff(loadData())
 
 
 
 export default function App() {
-
-  
-  const [count, setCount] = useState(0)
   let finalOutput = ""
   function countOverallStaff(staff,status) {
       let count = 0;
-    
       for (let category in staff) {
         count += staff[category].filter(person => person.status === status).length;
       }
-    
       return count;
     }
-  // staff.onTheJobTrainees.find(i => i.name === "Jose Elijah Tubig").status = "P"
+  
   function updateFinalOutput() {
       finalOutput = ""
       const month = ["January","February","March","April","May","June","July","August","September","October","November","December"];
@@ -81,9 +56,7 @@ export default function App() {
       })
       finalOutput += "\nAssociate Developers/Engineers (P="+staff.associateDevelopers.filter(person => person.status === "P").length+"/MC=0/L="+staff.associateDevelopers.filter(person => person.status === "L").length+"/TO=0/WFH="+staff.associateDevelopers.filter(person => person.status === "WFH").length+"/OS="+staff.associateDevelopers.filter(person => person.status === "OS").length+")\n"
       finalOutput += "N/A\n"
-      // staff.associateDevelopers.forEach((person) => {
-      //   finalOutput += person.name+" - "+person.status+" "+((person.timeIn === "") ? "" : "("+person.timeIn+")")+"\n"
-      // })\
+      
   
       finalOutput += "\nSoftware Developers/Designers (P="+staff.softwareDevelopersDesigners.filter(person => person.status === "P").length+"/MC=0/L="+staff.softwareDevelopersDesigners.filter(person => person.status === "L").length+"/TO=0/WFH="+staff.softwareDevelopersDesigners.filter(person => person.status === "WFH").length+"/OS="+staff.softwareDevelopersDesigners.filter(person => person.status === "OS").length+")\n"
       staff.softwareDevelopersDesigners.forEach((person) => {
@@ -103,6 +76,13 @@ export default function App() {
       console.log(finalOutput)
       copyToClipboard(finalOutput)
   }
+
+  function resetStaffData() {
+    localStorage.setItem("staffData", JSON.stringify(staffs));
+    updateStaff(loadData())
+    window.location.reload()
+  }
+
   return (
     <>
       <StaffList title="On the Job Trainees" list={staff.onTheJobTrainees} />
@@ -110,6 +90,7 @@ export default function App() {
       <StaffList title="Project Leaders" list={staff.projectLeaders} />
       <StaffList title="Reporting to CTO" list={staff.reportingToCTO} />
       <button onClick={() => updateFinalOutput()}>Copy Attendance</button>
+      <button className='destructive' onClick={() => resetStaffData()}>Reset</button>
     </>
   )
 }

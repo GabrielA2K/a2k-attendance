@@ -4,6 +4,10 @@
   box-sizing: border-box;
 }
 
+html, body {
+  background: #121212;
+}
+
 #root {
   max-width: 1280px;
   margin: 0 auto;
@@ -52,16 +56,6 @@
   /* background-color: rgba(255, 0, 0, 0.137); */
 }
 
-.iconWrapper {
-  border-radius: 10rem;
-  background-color: #7474741c;
-  height: 8px;
-  width: 8px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
 
 
 .status {
@@ -96,17 +90,22 @@
   color: #8cb0ff; 
 }
 
+
+
+.iconWrapper {
+  color: #7474741c;
+}
 .iconWrapper.P {
-  background-color: #258025;
+  color: #258025;
 }
 .iconWrapper.WFH {
-  background-color: #ac8826;
+  color: #ac8826;
 }
 .iconWrapper.L {
-  background-color: #aa2441;
+  color: #aa2441;
 }
 .iconWrapper.OS {
-  background-color: #2448aa;
+  color: #2448aa;
 }
 
 

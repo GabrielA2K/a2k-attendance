@@ -13,6 +13,7 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+
 a {
   font-weight: 500;
   color: #646cff;
@@ -52,6 +53,12 @@ button:hover {
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
+}
+button.destructive {
+  color: rgb(212, 58, 58);
+}
+button.destructive:hover {
+  border-color: rgb(212, 58, 58);
 }
 
 @media (prefers-color-scheme: light) {
