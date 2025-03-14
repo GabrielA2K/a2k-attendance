@@ -49,7 +49,7 @@ export default function App() {
       finalOutput = ""
       const month = ["January","February","March","April","May","June","July","August","September","October","November","December"];
       const today = new Date()
-      finalOutput += ((today.getHours()>12) ? "PM" : "AM") + " Attendance, "+((today.getDate()>9) ? today.getDate() : `0${today.getDate()}`)+" "+month[today.getMonth()]+"/"+today.getHours()+today.getMinutes()+"hrs\n"
+      finalOutput += ((today.getHours()>12) ? "PM" : "AM") + " Attendance, "+((today.getDate()>9) ? today.getDate() : `0${today.getDate()}`)+" "+month[today.getMonth()]+"/"+((today.getHours()>9) ? today.getHours() : `0${today.getHours()}`)+((today.getMinutes()>9) ? today.getMinutes() : `0${today.getMinutes()}`)+"hrs\n"
       finalOutput += "\nOn the Job Trainees (P="+staff.onTheJobTrainees.filter(person => person.status === "P").length+"/MC=0/L="+staff.onTheJobTrainees.filter(person => person.status === "L").length+"/TO=0/WFH="+staff.onTheJobTrainees.filter(person => person.status === "WFH").length+"/OS="+staff.onTheJobTrainees.filter(person => person.status === "OS").length+")\n"
       staff.onTheJobTrainees.forEach((person) => {
         finalOutput += person.name+" - "+((person.status === "L") ? ((person.leaveType === "") ? "Leave" : person.leaveType ) : person.status)+" "+((person.timeIn === "") ? "" : "("+person.timeIn+") ")+person.reason+"\n"
