@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { staffs } from './staffs'
 import StaffList from './StaffList'
+import FlexibleList from './FlexibleList'
 import { loadData, staff, updateStaff } from './components/process/LocalStorageHandler'
 import './App.css'
 
@@ -32,6 +33,11 @@ function initializeLocalStaffData() {
 
 initializeLocalStaffData()
 updateStaff(loadData())
+if (staffs?.dataVersion[0].version !== staff?.dataVersion[0].version) {
+  localStorage.clear();
+  initializeLocalStaffData()
+  updateStaff(loadData())
+}
 
 
 
@@ -40,7 +46,7 @@ export default function App() {
   function countOverallStaff(staff,status) {
       let count = 0;
       for (let category in staff) {
-        count += staff[category].filter(person => person.status === status).length;
+        count += staff[category].filter(person => person.status === status)?.length;
       }
       return count;
     }
@@ -50,9 +56,9 @@ export default function App() {
       const month = ["January","February","March","April","May","June","July","August","September","October","November","December"];
       const today = new Date()
       finalOutput += ((today.getHours()>12) ? "PM" : "AM") + " Attendance, "+((today.getDate()>9) ? today.getDate() : `0${today.getDate()}`)+" "+month[today.getMonth()]+"/"+((today.getHours()>9) ? today.getHours() : `0${today.getHours()}`)+((today.getMinutes()>9) ? today.getMinutes() : `0${today.getMinutes()}`)+"hrs\n"
-      finalOutput += "\nOn the Job Trainees (P="+staff.onTheJobTrainees.filter(person => person.status === "P").length+"/MC=0/L="+staff.onTheJobTrainees.filter(person => person.status === "L").length+"/TO=0/WFH="+staff.onTheJobTrainees.filter(person => person.status === "WFH").length+"/OS="+staff.onTheJobTrainees.filter(person => person.status === "OS").length+")\n"
+      finalOutput += "\nOn the Job Trainees (P="+staff.onTheJobTrainees.filter(person => person.status === "P").length+"/A="+staff.onTheJobTrainees.filter(person => person.status === "A").length+"/WFH="+staff.onTheJobTrainees.filter(person => person.status === "WFH").length+"/OS="+staff.onTheJobTrainees.filter(person => person.status === "OS").length+")\n"
       staff.onTheJobTrainees.forEach((person) => {
-        finalOutput += person.name+" - "+((person.status === "L") ? ((person.leaveType === "") ? "Leave" : person.leaveType ) : person.status)+" "+((person.timeIn === "") ? "" : "("+person.timeIn+") ")+person.reason+"\n"
+        finalOutput += person.name+" - "+((person.status === "A") ? ((person.leaveType === "") ? "A" : person.leaveType ) : person.status)+" "+((person.timeIn === "") ? "" : "("+person.timeIn+") ")+person.reason+"\n"
       })
       finalOutput += "\nAssociate Developers/Engineers (P="+staff.associateDevelopers.filter(person => person.status === "P").length+"/MC=0/L="+staff.associateDevelopers.filter(person => person.status === "L").length+"/TO=0/WFH="+staff.associateDevelopers.filter(person => person.status === "WFH").length+"/OS="+staff.associateDevelopers.filter(person => person.status === "OS").length+")\n"
       finalOutput += "N/A\n"
@@ -74,8 +80,6 @@ export default function App() {
       finalOutput += "\n*Reporting to Executives\n\nExpert Developers/Engineers\nN/A\n\nExecutive Board Members\nN/A\n\nGuests/Others\nN/A\n\n"
       finalOutput += "Overall Leave: "+countOverallStaff(staff,"L")+"\nOverall OS: "+countOverallStaff(staff,"OS")+"\nOverall TO: 0\nOverall WFH: "+countOverallStaff(staff,"WFH")+"\nOverall Office: "+countOverallStaff(staff,"P")
       
-      
-
       console.log(finalOutput)
       copyToClipboard(finalOutput)
   }
@@ -93,6 +97,7 @@ export default function App() {
       <StaffList title="Software Developers and Designers" list={staff.softwareDevelopersDesigners} />
       <StaffList title="Project Leaders" list={staff.projectLeaders} />
       <StaffList title="Reporting to CTO" list={staff.reportingToCTO} />
+      {/* <FlexibleList title="Executive Board Members" list={staff.executives} /> */}
       <button className="copyBtn" onClick={() => updateFinalOutput()}>Copy Attendance</button>
       <button className='destructive' onClick={() => resetStaffData()}>Reset</button>
     </>

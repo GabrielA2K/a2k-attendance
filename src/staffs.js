@@ -35,5 +35,10 @@ export const staffs = {
     reportingToCTO: [
       { name: "Evelyn Layson", status: "", timeIn: "", reason: "", leaveType: "" },
       { name: "Alonzo Pamintuan", status: "", timeIn: "", reason: "", leaveType: "" }
+    ],
+    executives: [],
+    others: [],
+    dataVersion: [
+      { version: "1.0.4", name: "", status: "", timeIn: "", reason: "", leaveType: "" }
     ]
 };

@@ -3,7 +3,7 @@ import { Icon } from '@iconify/react/dist/iconify.js'
 import { saveData, staff } from './components/process/LocalStorageHandler';
 
 
-export default function StaffList(stafflist) {
+export default function FlexibleList(stafflist) {
     
     const toggleStatus = (staffName,currentStatus,toStatus) => {
         if(currentStatus === toStatus) {
@@ -47,7 +47,7 @@ export default function StaffList(stafflist) {
     return (
     <>
         <p className={"title "+stafflist.titleClass}>{stafflist.title}</p>
-        <p className="details">{"P = "+stafflist.list.filter(person => person.status === "P").length+(stafflist.title === "On the Job Trainees" ? (" / A = "+stafflist.list.filter(person => person.status === "A").length): (" / MC = 0 / L = "+stafflist.list.filter(person => person.status === "L").length)+" / TO = 0")+" / WFH = "+stafflist.list.filter(person => person.status === "WFH").length+" / OS = "+stafflist.list.filter(person => person.status === "OS").length}</p>
+        <p className="details">{"P = "+stafflist.list.filter(person => person.status === "P").length}</p>
         
         {stafflist.list.map((i)=>{
           const [status, setStatus] = useState(i.status)
@@ -71,18 +71,18 @@ export default function StaffList(stafflist) {
                     toggleStatus(i.name,i.status,"WFH")
                     setStatus(i.status)
                   }}>WFH</p>
+                  <p className={statusClassCheck(status,"L")} onClick={()=>{
+                    toggleStatus(i.name,i.status,"L")
+                    setStatus(i.status)
+                  }}>Leave</p>
                   <p className={statusClassCheck(status,"OS")} onClick={()=>{
                     toggleStatus(i.name,i.status,"OS")
                     setStatus(i.status)
                   }}>OS</p>
-                  <p className={(stafflist.title === "On the Job Trainees" ? "hide ": "")+statusClassCheck(status,"L")} onClick={()=>{
-                    toggleStatus(i.name,i.status,"L")
+                  <p className={statusClassCheck(status,"/")} onClick={()=>{
+                    toggleStatus(i.name,i.status,"/")
                     setStatus(i.status)
-                  }}>Leave</p>
-                  <p className={(stafflist.title !== "On the Job Trainees" ? "hide ": "")+statusClassCheck(status,"A")} onClick={()=>{
-                    toggleStatus(i.name,i.status,"A")
-                    setStatus(i.status)
-                  }}>Absent</p>
+                  }}>/</p>
 
                 
 
