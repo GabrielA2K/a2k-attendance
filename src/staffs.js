@@ -37,6 +37,8 @@ export const staffs = {
       { name: "Alonzo Pamintuan", status: "", timeIn: "", reason: "", leaveType: "" }
     ],
     executives: [],
-    others: []
-    
+    others: [],
+    dataVersion: [
+      { version: "1.0.5", name: "", status: "", timeIn: "", reason: "", leaveType: "" }
+    ]
 };

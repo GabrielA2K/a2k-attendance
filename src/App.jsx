@@ -33,6 +33,7 @@ function initializeLocalStaffData() {
 try {
   initializeLocalStaffData()
   updateStaff(loadData())
+  // console.log(staff)
   if (staffs?.dataVersion[0].version !== staff?.dataVersion[0].version) {
     localStorage.clear();
     initializeLocalStaffData()
