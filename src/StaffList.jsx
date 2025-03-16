@@ -16,7 +16,7 @@ export default function StaffList(stafflist) {
           stafflist.list.find(j => j.name === staffName).status = toStatus
         }   
         saveData(staff)
-        console.log(JSON.parse(localStorage.getItem("staffData")))
+        // console.log(JSON.parse(localStorage.getItem("staffData")))
         // console.log(i)
       }
     
@@ -47,9 +47,9 @@ export default function StaffList(stafflist) {
     return (
     <>
         <p className={"title "+stafflist.titleClass}>{stafflist.title}</p>
-        <p className="details">{"P = "+stafflist.list.filter(person => person.status === "P").length+(stafflist.title === "On the Job Trainees" ? (" / A = "+stafflist.list.filter(person => person.status === "A").length): (" / MC = 0 / L = "+stafflist.list.filter(person => person.status === "L").length)+" / TO = 0")+" / WFH = "+stafflist.list.filter(person => person.status === "WFH").length+" / OS = "+stafflist.list.filter(person => person.status === "OS").length}</p>
+        <p className="details">{"P = "+stafflist.list.filter(person => person.status === "P").length+(stafflist.title === "On the Job Trainees" ? (" / A = "+stafflist.list.filter(person => person.status === "A").length): (" / L = "+stafflist.list.filter(person => person.status === "L").length)+" / TO = 0")+" / WFH = "+stafflist.list.filter(person => person.status === "WFH").length+" / OS = "+stafflist.list.filter(person => person.status === "OS").length}</p>
         
-        {stafflist.list.map((i)=>{
+        {stafflist.list.map((i, key)=>{
           const [status, setStatus] = useState(i.status)
           const timeInput = useRef(null)
           
@@ -57,7 +57,7 @@ export default function StaffList(stafflist) {
           
 
           return (
-            <div className={"stafflist.listItemContainer "}>
+            <div key={key} className={"stafflist.listItemContainer "}>
               
               <div className="staffListItem">
                 <p className={"nameStatus "+status}><Icon icon={"material-symbols:circle"} height={10} width={10} className={'iconWrapper '+status}/>{i.name}</p>

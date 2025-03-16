@@ -16,6 +16,9 @@ html, body {
   gap: 0.8rem;
   flex-direction: column;
 }
+p {
+  white-space: pre-wrap;
+}
 .mainTitle {
   font-size: 1.8rem;
   font-weight: 700;
