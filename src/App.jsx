@@ -30,14 +30,22 @@ function initializeLocalStaffData() {
 }
 
 
-
-initializeLocalStaffData()
-updateStaff(loadData())
-if (staffs?.dataVersion[0].version !== staff?.dataVersion[0].version) {
+try {
+  initializeLocalStaffData()
+  updateStaff(loadData())
+  if (staffs?.dataVersion[0].version !== staff?.dataVersion[0].version) {
+    localStorage.clear();
+    initializeLocalStaffData()
+    updateStaff(loadData())
+}
+} catch (error) {
   localStorage.clear();
   initializeLocalStaffData()
   updateStaff(loadData())
 }
+
+
+
 
 
 
