@@ -43,6 +43,10 @@ export default function FlexibleList(stafflist) {
       return "status "+testStatus+" "+(getStatus === testStatus ? ("active") : ("inactive"))+((getStatus === testStatus || (getStatus === "")) ? "" : " hide")
     }
 
+    const guestNameInput = useRef(null)
+    const guestAppointmentInput = useRef(null)
+    const [modalOverlay, setModalOverlay] = useState('inactive')
+
     
     return (
     <>
@@ -111,6 +115,21 @@ export default function FlexibleList(stafflist) {
             </div>
           )
         }) }
+        
+        <div className={"modalOverlay "+modalOverlay}>
+          <div className="modalCard">
+            <input ref={guestNameInput} type="text" placeholder='Guest Name' className='w-full guestInput'/>
+            <input ref={guestAppointmentInput} type="text" placeholder='Appointment' className='w-full guestInput'/>
+            <button onClick={()=>{
+              stafflist.list.push({name: guestNameInput.current?.value, status: "P", timeIn: "", reason: "", leaveType: ""})
+              saveData(staff)
+              window.location.reload()
+            }}>Add Guest</button>
+          </div>
+        </div>
+        <button onClick={()=>{
+          setModalOverlay('active')
+        }}>Add</button>
     </>
     )
 }

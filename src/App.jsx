@@ -106,7 +106,7 @@ export default function App() {
       <StaffList title="Software Developers and Designers" list={staff.softwareDevelopersDesigners} />
       <StaffList title="Project Leaders" list={staff.projectLeaders} />
       <StaffList title="Reporting to CTO" list={staff.reportingToCTO} />
-      {/* <FlexibleList title="Executive Board Members" list={staff.executives} /> */}
+      {/* <FlexibleList title="Guests/Others" list={staff.others} /> */}
       
       <button className="copyBtn" onClick={() => updateFinalOutput()}>Copy Attendance</button>
       <button className='destructive' onClick={() => resetStaffData()}>Reset</button>

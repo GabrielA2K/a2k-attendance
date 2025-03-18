@@ -88,12 +88,12 @@ export default function StaffList(stafflist) {
 
                 
                 { (status === "P" || status === "OS") ? <>
-                <input ref={timeInput} type="text" defaultValue={i.timeIn} placeholder="HH:MM" className='inputHH' onInput={(e)=>{
+                <input ref={timeInput} type="text" defaultValue={i.timeIn} placeholder="HH:MM" className={'inputHH '} onInput={(e)=>{
                   updateTimeIn(i.name,e.target.value)
                 }}/>
-                <div className="divIconBtn" onClick={() => {
+                <div className={"divIconBtn"} onClick={() => {
                   updateTimeIn(i.name,getCurentTime())
-                  timeInput.current.defaultValue = i.timeIn
+                  timeInput.current.value = i.timeIn
                 }}><Icon icon="mingcute:time-line" /></div>
                 </> : null }
 
