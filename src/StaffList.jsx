@@ -5,23 +5,23 @@ import { saveData, staff } from './components/process/LocalStorageHandler';
 
 export default function StaffList(stafflist) {
     
-    const toggleStatus = (staffName,currentStatus,toStatus) => {
+    const toggleStatus = (key,currentStatus,toStatus) => {
         if(currentStatus === toStatus) {
-          stafflist.list.find(j => j.name === staffName).status = ""
-          stafflist.list.find(j => j.name === staffName).timeIn = ""
-          stafflist.list.find(j => j.name === staffName).reason = ""
-          stafflist.list.find(j => j.name === staffName).leaveType = ""
+          stafflist.list[key].status = ""
+          stafflist.list[key].timeIn = ""
+          stafflist.list[key].reason = ""
+          stafflist.list[key].leaveType = ""
         //   return
         } else {
-          stafflist.list.find(j => j.name === staffName).status = toStatus
+          stafflist.list[key].status = toStatus
         }   
         saveData(staff)
         // console.log(JSON.parse(localStorage.getItem("staffData")))
         // console.log(i)
       }
     
-    const updateTimeIn = (staffName,timeIn) => {
-      stafflist.list.find(j => j.name === staffName).timeIn = timeIn
+    const updateTimeIn = (key,timeIn) => {
+      stafflist.list[key].timeIn = timeIn
       saveData(staff)
       return
     }
@@ -29,13 +29,13 @@ export default function StaffList(stafflist) {
       const date = new Date()
       return `${((date.getHours()>9) ? date.getHours() : `0${date.getHours()}`)+":"+((date.getMinutes()>9) ? date.getMinutes() : `0${date.getMinutes()}`)}`
     }
-    const updateReason = (staffName,reason) => {
-      stafflist.list.find(j => j.name === staffName).reason = reason
+    const updateReason = (key,reason) => {
+      stafflist.list[key].reason = reason
       saveData(staff)
       return
     }
-    const updateLeave = (staffName,leave) => {
-      stafflist.list.find(j => j.name === staffName).leaveType = leave
+    const updateLeave = (key,leave) => {
+      stafflist.list[key].leaveType = leave
       saveData(staff)
       return
     }
@@ -64,23 +64,23 @@ export default function StaffList(stafflist) {
                 <div className="changeStatusButtonContainer">
                 
                   <p className={statusClassCheck(status,"P")} onClick={()=>{
-                    toggleStatus(i.name,i.status,"P")
+                    toggleStatus(key,i.status,"P")
                     setStatus(i.status)
                   }}>Present</p>
                   <p className={statusClassCheck(status,"WFH")} onClick={()=>{
-                    toggleStatus(i.name,i.status,"WFH")
+                    toggleStatus(key,i.status,"WFH")
                     setStatus(i.status)
                   }}>WFH</p>
                   <p className={statusClassCheck(status,"OS")} onClick={()=>{
-                    toggleStatus(i.name,i.status,"OS")
+                    toggleStatus(key,i.status,"OS")
                     setStatus(i.status)
                   }}>OS</p>
                   <p className={(stafflist.title === "On the Job Trainees" ? "hide ": "")+statusClassCheck(status,"L")} onClick={()=>{
-                    toggleStatus(i.name,i.status,"L")
+                    toggleStatus(key,i.status,"L")
                     setStatus(i.status)
                   }}>Leave</p>
                   <p className={(stafflist.title !== "On the Job Trainees" ? "hide ": "")+statusClassCheck(status,"A")} onClick={()=>{
-                    toggleStatus(i.name,i.status,"A")
+                    toggleStatus(key,i.status,"A")
                     setStatus(i.status)
                   }}>Absent</p>
 
@@ -89,20 +89,20 @@ export default function StaffList(stafflist) {
                 
                 { (status === "P" || status === "OS") ? <>
                 <input ref={timeInput} type="text" defaultValue={i.timeIn} placeholder="HH:MM" className={'inputHH '} onInput={(e)=>{
-                  updateTimeIn(i.name,e.target.value)
+                  updateTimeIn(key,e.target.value)
                 }}/>
                 <div className={"divIconBtn"} onClick={() => {
-                  updateTimeIn(i.name,getCurentTime())
+                  updateTimeIn(key,getCurentTime())
                   timeInput.current.value = i.timeIn
                 }}><Icon icon="mingcute:time-line" /></div>
                 </> : null }
 
                 { (status === "OS") ? <><input type="text" defaultValue={i.reason} placeholder="Reason/Destination" className='inputReason' onInput={(e)=>{
-                  updateReason(i.name,e.target.value)
+                  updateReason(key,e.target.value)
                 }}/></> : null }
 
                 { (status === "L") ? <><input type="text" defaultValue={i.leaveType} placeholder="Leave Type" className='inputReason' onInput={(e)=>{
-                  updateLeave(i.name,e.target.value)
+                  updateLeave(key,e.target.value)
                 }}/></> : null }
                   
                 </div>

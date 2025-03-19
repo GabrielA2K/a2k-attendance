@@ -86,7 +86,20 @@ export default function App() {
         finalOutput += person.name+" - "+((person.status === "L") ? ((person.leaveType === "") ? "Leave" : person.leaveType ) : person.status)+" "+((person.timeIn === "") ? "" : "("+person.timeIn+") ")+person.reason+"\n"
       })
   
-      finalOutput += "\n*Reporting to Executives\n\nExpert Developers/Engineers\nN/A\n\nExecutive Board Members\nN/A\n\nGuests/Others\nN/A\n\n"
+      finalOutput += "\n*Reporting to Executives\n\nExpert Developers/Engineers\nN/A\n\nExecutive Board Members\nN/A\n\n"
+      finalOutput += "Guests/Others\n"
+      
+      let guestCounter = 0;
+      staff.others
+      .filter(person => person.status === "P") // Filter only those with status "P"
+      .forEach(person => { 
+        finalOutput += person.name + " " + ((person.timeIn === "") ? "" : "(" + person.timeIn + ") - ") + person.reason + "\n";
+        guestCounter++;
+      });
+      if (guestCounter === 0) {
+        finalOutput += "N/A\n";
+      }
+      finalOutput += "\n"
       finalOutput += "Overall Leave: "+countOverallStaff(staff,"L")+"\nOverall OJT Absentees: "+countOverallStaff(staff,"A")+"\nOverall OS: "+countOverallStaff(staff,"OS")+"\nOverall TO: 0\nOverall WFH: "+countOverallStaff(staff,"WFH")+"\nOverall Office: "+countOverallStaff(staff,"P")
       
       console.log(finalOutput)
@@ -106,7 +119,7 @@ export default function App() {
       <StaffList title="Software Developers and Designers" list={staff.softwareDevelopersDesigners} />
       <StaffList title="Project Leaders" list={staff.projectLeaders} />
       <StaffList title="Reporting to CTO" list={staff.reportingToCTO} />
-      {/* <FlexibleList title="Guests/Others" list={staff.others} /> */}
+      <FlexibleList title="Guests/Others" list={staff.others} />
       
       <button className="copyBtn" onClick={() => updateFinalOutput()}>Copy Attendance</button>
       <button className='destructive' onClick={() => resetStaffData()}>Reset</button>

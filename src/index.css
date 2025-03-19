@@ -54,10 +54,12 @@ button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
-button.destructive {
+button.destructive,
+.destructive {
   color: rgb(212, 58, 58);
 }
-button.destructive:hover {
+button.destructive:hover,
+.destructive:hover {
   border-color: rgb(212, 58, 58);
 }
 

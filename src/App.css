@@ -224,43 +224,6 @@ input.inputReason {
   flex-wrap: wrap;
 }
 
-.modalOverlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background-color: rgba(0, 0, 0, 0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 100;
-}
-.modalCard {
-  height: 20rem;
-  width: min(30rem, calc(100dvw - 2rem));
-  background-color: rgb(15, 15, 15);
-  border-radius: 1rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 1rem;
-  padding: 2rem;
-}
-.modalOverlay.inactive {
-  display: none;
-}
-.modalOverlay.active {
-  display: flex;
-}
-.w-full {
-  width: 100%;
-}
-.guestInput {
-  height: 2.5rem;
-}
-
 
 
 
