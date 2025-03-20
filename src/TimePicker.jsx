@@ -18,8 +18,10 @@ export default function TimePicker({ setTime, setActivity, ref }) {
     let hh = date.getHours()
 
     useEffect(() => {
-        document.getElementById('m'+mm)?.scrollIntoView({block: "center"})
-        document.getElementById('h'+hh)?.scrollIntoView({block: "center"})
+        if (hh > 5 && hh < 19) {
+            document.getElementById('m'+mm)?.scrollIntoView({block: "center"})
+            document.getElementById('h'+hh)?.scrollIntoView({block: "center"})
+        }
     }, [])
 
     return (
