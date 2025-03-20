@@ -116,9 +116,24 @@ export default function StaffList(stafflist) {
                   updateReason(key,e.target.value)
                 }}/></> : null }
 
-                { (status === "L") ? <><input type="text" defaultValue={i.leaveType} placeholder="Leave Type" className='inputReason' onInput={(e)=>{
-                  updateLeave(key,e.target.value)
-                }}/></> : null }
+                { (status === "L") ? 
+                <>
+                  {/* <input type="text" defaultValue={i.leaveType} placeholder="Leave Type" className='inputReason' onInput={(e)=>{
+                    updateLeave(key,e.target.value)
+                  }}/> */}
+                  <div className="selectContainer" onChange={(e)=>{
+                    updateLeave(key,e.target.value)}}>
+                    <select name="leave" id="" className='leaveSelect'>
+                      <option value="Leave">Leave</option>
+                      <option value="Sick Leave">Sick Leave</option>
+                      <option value="Family Care Leave">Family Care Leave</option>
+                      <option value="Medical Care Leave">Medical Care Leave</option>
+                      <option value="Maternity Leave">Maternity Leave</option>
+                      <option value="OIL">OIL</option>
+                    </select>
+                  </div>
+                 
+                </> : null }
                   
                 </div>
                 

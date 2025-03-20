@@ -229,6 +229,37 @@ input.inputReason {
 }
 
 
+select {
+  position: relative;
+  border-radius: 0.5rem;
+  border: 0px solid transparent;
+  background-color: rgba(46, 46, 46, 0.01);
+  color: rgba(66, 132, 255, 0.897);
+  width: 10rem;
+  height: 2.1rem;
+}
+select:focus {
+  outline: 0px solid transparent;
+}
+.selectContainer {
+  border-radius: 10rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(255, 255, 255, 0.05);
+  padding-inline: 0.8rem;
+}
+option {
+  background-color: #1a1a1a;
+  color: rgba(204, 204, 204, 0.897);
+  padding: 1rem;
+}
+option:hover {
+  background-color: #1a1a1a;
+  color: #646cff;
+}
+
+
 
 
 .hide {

@@ -42,7 +42,7 @@ export default function TimePicker({ setTime, setActivity, ref }) {
 
                 const [hourItemRef, hourInView] = useInView({threshold: 1})
                 return <>
-                  <p id={"h"+hour} ref={hourItemRef} key={key} className={"timeRoller "+hourInView} onClick={()=>{
+                  <p key={key} id={"h"+hour} ref={hourItemRef} className={"timeRoller "+hourInView} onClick={()=>{
                     document.getElementById(`h${hour}`).scrollIntoView({behavior: "smooth", block: "center"})
                   }}>{(hour<10) ? `0${hour}` : hour}</p>
 
@@ -75,7 +75,7 @@ export default function TimePicker({ setTime, setActivity, ref }) {
 
                 const [minuteItemRef, minuteInView] = useInView({threshold: 1})
                 return <>
-                  <p id={"m"+minute} ref={minuteItemRef} key={key} className={"timeRoller "+minuteInView} onClick={()=>{
+                  <p key={key} id={"m"+minute} ref={minuteItemRef} className={"timeRoller "+minuteInView} onClick={()=>{
                     document.getElementById(`m${minute}`).scrollIntoView({behavior: "smooth", block: "center"})
                   }}>{(minute<10) ? `0${minute}` : minute}</p>
 
