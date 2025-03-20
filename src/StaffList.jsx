@@ -124,7 +124,7 @@ export default function StaffList(stafflist) {
                   }}/> */}
                   <div className="selectContainer" onChange={(e)=>{
                     updateLeave(key,e.target.value)}}>
-                    <select name="leave" id="" className='leaveSelect'>
+                    <select defaultValue={i.leaveType} name="leave" id="" className='leaveSelect'>
                       <option value="Leave">Leave</option>
                       <option value="Sick Leave">Sick Leave</option>
                       <option value="Family Care Leave">Family Care Leave</option>

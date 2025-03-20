@@ -94,7 +94,7 @@ export default function App() {
       staff.others
       .filter(person => person.status === "P") // Filter only those with status "P"
       .forEach(person => { 
-        finalOutput += person.name + " " + ((person.timeIn === "") ? "" : "(" + person.timeIn + ") - ") + person.reason + "\n";
+        finalOutput += person.name + " " + ((person.timeIn === "") ? "" : "(" + person.timeIn + ")") + (person.reason === "" ? "" : (" - "+person.reason)) + "\n";
         guestCounter++;
       });
       if (guestCounter === 0) {
