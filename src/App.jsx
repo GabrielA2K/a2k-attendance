@@ -3,6 +3,7 @@ import { staffs } from './staffs'
 import StaffList from './StaffList'
 import FlexibleList from './FlexibleList'
 import { loadData, staff, updateStaff } from './components/process/LocalStorageHandler'
+import TimePicker from './TimePicker'
 import './App.css'
 
 
@@ -112,6 +113,7 @@ export default function App() {
     window.location.reload()
   }
 
+
   return (
     <>
       <p className='mainTitle'>DDO Attendance Helper</p>
@@ -123,6 +125,8 @@ export default function App() {
       
       <button className="copyBtn" onClick={() => updateFinalOutput()}>Copy Attendance</button>
       <button className='destructive' onClick={() => resetStaffData()}>Reset</button>
+      {/* <TimePicker /> */}
+      
     </>
   )
 }

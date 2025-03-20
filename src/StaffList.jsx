@@ -1,6 +1,7 @@
 import React, { useRef, useState } from 'react';
 import { Icon } from '@iconify/react/dist/iconify.js'
 import { saveData, staff } from './components/process/LocalStorageHandler';
+import TimePicker from './TimePicker';
 
 
 export default function StaffList(stafflist) {
@@ -42,6 +43,8 @@ export default function StaffList(stafflist) {
     const statusClassCheck = (getStatus,testStatus) => {
       return "status "+testStatus+" "+(getStatus === testStatus ? ("active") : ("inactive"))+((getStatus === testStatus || (getStatus === "")) ? "" : " hide")
     }
+    
+
 
     
     return (
@@ -53,7 +56,7 @@ export default function StaffList(stafflist) {
           const [status, setStatus] = useState(i.status)
           const timeInput = useRef(null)
           
-          
+          const [timePickerActive, setTimePickerActive] = useState(false)
           
 
           return (
@@ -66,6 +69,9 @@ export default function StaffList(stafflist) {
                   <p className={statusClassCheck(status,"P")} onClick={()=>{
                     toggleStatus(key,i.status,"P")
                     setStatus(i.status)
+                    if (i.status === "P") {
+                      setTimePickerActive(true)
+                    }
                   }}>Present</p>
                   <p className={statusClassCheck(status,"WFH")} onClick={()=>{
                     toggleStatus(key,i.status,"WFH")
@@ -74,6 +80,9 @@ export default function StaffList(stafflist) {
                   <p className={statusClassCheck(status,"OS")} onClick={()=>{
                     toggleStatus(key,i.status,"OS")
                     setStatus(i.status)
+                    if (i.status === "OS") {
+                      setTimePickerActive(true)
+                    }
                   }}>OS</p>
                   <p className={(stafflist.title === "On the Job Trainees" ? "hide ": "")+statusClassCheck(status,"L")} onClick={()=>{
                     toggleStatus(key,i.status,"L")
@@ -88,12 +97,18 @@ export default function StaffList(stafflist) {
 
                 
                 { (status === "P" || status === "OS") ? <>
-                <input ref={timeInput} type="text" defaultValue={i.timeIn} placeholder="HH:MM" className={'inputHH '} onInput={(e)=>{
+                <input ref={timeInput} type="text" defaultValue={(i.timeIn === "") ? "" : i.timeIn} placeholder="HH:MM" className={'inputHH '} onChange={(e)=>{
+                  // console.log(e.target.value)
+                  updateTimeIn(key,e.target.value)
+                }} onFocus={(e)=>{
+                  // console.log(e.target.value)
                   updateTimeIn(key,e.target.value)
                 }}/>
                 <div className={"divIconBtn"} onClick={() => {
-                  updateTimeIn(key,getCurentTime())
-                  timeInput.current.value = i.timeIn
+                  // updateTimeIn(key,getCurentTime())
+                  // timeInput.current.value = i.timeIn
+                  setTimePickerActive(true)
+                  
                 }}><Icon icon="mingcute:time-line" /></div>
                 </> : null }
 
@@ -108,9 +123,15 @@ export default function StaffList(stafflist) {
                 </div>
                 
               </div>
+              {
+                timePickerActive ? <TimePicker setActivity={setTimePickerActive} ref={timeInput} /> : null
+              }
+              
             </div>
           )
         }) }
+
+        
     </>
     )
 }

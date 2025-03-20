@@ -1,6 +1,7 @@
 import React, { useRef, useState } from 'react';
 import { Icon } from '@iconify/react/dist/iconify.js'
 import { saveData, staff } from './components/process/LocalStorageHandler';
+import TimePicker from './TimePicker';
 import './FlexibleList.css'
 
 
@@ -9,7 +10,7 @@ export default function FlexibleList(stafflist) {
     const softRemove = (key) => {
         stafflist.list[key].status = "Left"
         saveData(staff)
-        console.log(JSON.parse(localStorage.getItem("staffData")))
+        // console.log(JSON.parse(localStorage.getItem("staffData")))
       }
     const getCurentTime = () => {
       const date = new Date()
@@ -22,6 +23,8 @@ export default function FlexibleList(stafflist) {
     const guestAppointmentInput = useRef(null)
     const [modalOverlay, setModalOverlay] = useState(false)
     const timeInput = useRef(null)
+    const addBtn = useRef(null)
+    const [timePickerActive, setTimePickerActive] = useState(false)
     
     return (
     <>
@@ -66,7 +69,8 @@ export default function FlexibleList(stafflist) {
             <input ref={guestAppointmentInput} type="text" placeholder='Appointment' className='w-full guestInput'/>
               <input ref={timeInput} type="text" placeholder="HH:MM" className='inputHH' />
               <div className="divIconBtn" onClick={() => {
-                timeInput.current.value = getCurentTime()
+                // timeInput.current.value = getCurentTime()
+                setTimePickerActive(true)
               }}><Icon icon="mingcute:time-line" />
               </div>
             </div>
@@ -78,6 +82,7 @@ export default function FlexibleList(stafflist) {
                   stafflist.list.push({name: guestNameInput.current?.value, status: "P", timeIn: timeInput.current?.value, reason: guestAppointmentInput.current?.value, leaveType: ""})
                   saveData(staff)
                   window.location.reload()
+                  addBtn.current?.scrollIntoView()
                 } else {
                   return
                 }
@@ -86,9 +91,14 @@ export default function FlexibleList(stafflist) {
             </div>
             
           </div>
+
+          {
+            timePickerActive ? <TimePicker setActivity={setTimePickerActive} ref={timeInput} /> : null
+          }
         </div>
-        <button onClick={()=>{
+        <button ref={addBtn} onClick={()=>{
           setModalOverlay(true)
+          timeInput.current.value = getCurentTime()
         }}>Add</button>
     </>
     )

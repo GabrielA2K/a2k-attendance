@@ -10,6 +10,7 @@ html, body {
 
 #root {
   max-width: 1280px;
+  /* height: 100dvh; */
   margin: 0 auto;
   padding: 1rem 1rem;
   display: flex;
@@ -18,6 +19,9 @@ html, body {
 }
 p {
   white-space: pre-wrap;
+}
+#root:has(.timePickerOverlay.active) {
+  touch-action: none;
 }
 .mainTitle {
   font-size: 1.8rem;
