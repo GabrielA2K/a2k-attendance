@@ -104,3 +104,26 @@
   .guestListHeader > .destructive:hover {
     opacity: 0.6;
   }
+
+
+
+
+  @media only screen and (max-width: 600px) {
+    .modalCard {
+      /* height: 20rem; */
+      width: min(30rem, calc(100dvw - 2rem));
+      background-color: rgb(15, 15, 15);
+      border-radius: 1rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.6rem 1.5rem;
+    }
+    .actionButtons {
+      margin-top: 1rem;
+      margin-bottom: 0.6rem;
+    }
+  
+  }

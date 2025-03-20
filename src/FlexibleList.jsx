@@ -62,7 +62,7 @@ export default function FlexibleList(stafflist) {
           <div className="modalCard" onClick={(e)=>{e.stopPropagation()}}>
             <div className="header">
               <p className="title">Record Guest</p>
-              <Icon icon="mingcute:close-circle-fill" className="closeIcon" height={32} onClick={()=>{setModalOverlay(false)}}/>
+              {/* <Icon icon="mingcute:close-circle-fill" className="closeIcon" height={32} onClick={()=>{setModalOverlay(false)}}/> */}
             </div>
             <input ref={guestNameInput} type="text" placeholder='Guest Name' className='w-full guestInput'/>
             <div className="guestDetailsContainer">

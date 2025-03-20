@@ -63,7 +63,8 @@ export default function StaffList(stafflist) {
             <div key={key} className={"stafflist.listItemContainer "}>
               
               <div className="staffListItem">
-                <p className={"nameStatus "+status}><Icon icon={"material-symbols:circle"} height={10} width={10} className={'iconWrapper '+status}/>{i.name}</p>
+                <p className={"nameStatus "+(status !== "" ? "active" : "")}><Icon icon={"material-symbols:circle"} height={10} width={10} className={'iconWrapper '+status}/>{i.name}</p>
+                {/* {(status === "") ? <Icon icon={"mingcute:warning-line"} height={18} width={18} className={'unsetIcon '+status}/> : null} */}
                 <div className="changeStatusButtonContainer">
                 
                   <p className={statusClassCheck(status,"P")} onClick={()=>{
