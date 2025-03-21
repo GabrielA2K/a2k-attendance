@@ -36,9 +36,16 @@ export const staffs = {
       { name: "Evelyn Layson", status: "", timeIn: "", reason: "", leaveType: "" },
       { name: "Alonzo Pamintuan", status: "", timeIn: "", reason: "", leaveType: "" }
     ],
-    executives: [],
+    executives: [
+      { name: "Jasdeep Sandhu", position: "Chairman", status: "", timeIn: "", reason: "", leaveType: "" },
+      { name: "Daniel Jimenez", position: "CEO", status: "", timeIn: "", reason: "", leaveType: "" },
+      { name: "Mark Nuqui", position: "COO", status: "", timeIn: "", reason: "", leaveType: "" },
+      { name: "Jhon Nuqui", position: "CTO", status: "", timeIn: "", reason: "", leaveType: "" },
+      { name: "Ma. Ronna Silos", position: "CFO", status: "", timeIn: "", reason: "", leaveType: "" },
+      { name: "Charlotte Bondoc", position: "CPO", status: "", timeIn: "", reason: "", leaveType: "" }
+    ],
     others: [],
     dataVersion: [
-      { version: "1.0.5", name: "", status: "", timeIn: "", reason: "", leaveType: "" }
+      { version: "1.0.6", name: "", status: "", timeIn: "", reason: "", leaveType: "" }
     ]
 };

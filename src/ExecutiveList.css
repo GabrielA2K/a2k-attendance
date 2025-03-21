@@ -1,4 +1,3 @@
-
 .modalOverlay {
     position: fixed;
     top: 0;
@@ -32,10 +31,7 @@
   .w-full {
     width: 100%;
   }
-  .guestInput {
-    text-align: left;
-    height: 2.5rem;
-  }
+ 
   .header {
     display: flex;
     justify-content: space-between;
@@ -56,16 +52,7 @@
   .closeIcon:hover {
     opacity: 0.4;
   }
-  .guestDetailsContainer {
-    display: flex;
-    gap: 0.5rem;
-    width: 100%;
-    justify-content: space-between;
-  }
-.guestDetailsContainer > .inputHH {
-  height: 2.5rem;
-}
-
+  
   .actionButtons {
     display: flex;
     gap: 0.5rem;
@@ -82,35 +69,84 @@
     color: rgba(255, 255, 255, 0.5);
   }
 
-  .guestNameDetails {
-    margin-left: 0.5rem;
+  .execNameDetails {
+    margin-left: 0rem;
+    display: flex;
+    gap: 0.4rem;
+    align-items: center;
+    justify-content: flex-start;
   }
-  .guestAppointment {
+  .execAppointment {
     font-size: 0.8rem;
-    opacity: 0.5;
+    font-weight: 600;
+    color: rgba(255, 210, 112, 0.5);
   }
+  
 
-  .guestListHeader {
+  .execListHeader {
     display: flex;
     justify-content: space-between;
-    align-items: flex-start;
+    align-items: center;
     gap: 0.5rem;
     width: 100%;
     padding-right: 0.2rem;
 
   }
 
-  .guestListHeader > .destructive {
+  .execListHeader > .iconBtn {
     cursor: pointer;
     opacity: 0.5;
   }
 
-  .guestListHeader > .destructive:hover {
+  .execListHeader > .iconBtn:hover {
     opacity: 0.8;
   }
-  .removeGuestBtn {
-    margin-right: 0.2rem;
+
+  .executives {
+    display: flex;
+    flex-grow: 1;
+    width: 100%;
   }
+  .execListItem {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.6rem 0.5rem 0.6rem 1rem;
+    background-color: rgba(255, 255, 255, 0.01);
+    border-radius: 1rem;
+    transition: 50ms;
+    -webkit-user-select: none; /* Safari */
+    -ms-user-select: none; /* IE 10 and IE 11 */
+    user-select: none; /* Standard syntax */
+    transition: 300ms;
+    flex-grow: 1;
+    min-height: 3.5rem;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    box-sizing: border-box;
+    /* border: 1px solid rgba(255, 188, 43, 0.1); */
+  }
+
+  .timeSelectContainer {
+    display: flex;
+    align-items: center;
+    /* justify-content: space-between; */
+    width: 100%;
+    /* margin-left: 1rem; */
+    /* gap: 0.5rem; */
+  }
+  .timeSelectContainer > input.inputHH {
+    margin-left: auto;
+  }
+  .removeExec {
+    transform: translate(-0.2rem, -0.2rem);
+  }
+  .status.P.exec {
+    margin-right: 0.5rem;
+  }
+
+
 
 
 

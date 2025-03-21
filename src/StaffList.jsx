@@ -60,7 +60,7 @@ export default function StaffList(stafflist) {
           
 
           return (
-            <div key={key} className={"stafflist.listItemContainer "}>
+            <div key={key} className={"staffListItemContainer "}>
               
               <div className="staffListItem">
                 <p className={"nameStatus "+(status !== "" ? "active" : "")}><Icon icon={"material-symbols:circle"} height={10} width={10} className={'iconWrapper '+status}/>{i.name}</p>
@@ -96,8 +96,10 @@ export default function StaffList(stafflist) {
 
                 
 
-                
-                { (status === "P" || status === "OS") ? <>
+                { (status === "OS") ? <><input type="text" defaultValue={i.reason} placeholder="Reason/Destination" className='inputReason' onInput={(e)=>{
+                  updateReason(key,e.target.value)
+                }}/></> : null }
+                { (status === "P" || status === "OS") ? <div className="timeInputContainer">
                 <input ref={timeInput} type="text" defaultValue={(i.timeIn === "") ? "" : i.timeIn} placeholder="HH:MM" className={'inputHH '} onChange={(e)=>{
                   // console.log(e.target.value)
                   updateTimeIn(key,e.target.value)
@@ -111,11 +113,9 @@ export default function StaffList(stafflist) {
                   setTimePickerActive(true)
                   
                 }}><Icon icon="mingcute:time-line" /></div>
-                </> : null }
+                </div> : null }
 
-                { (status === "OS") ? <><input type="text" defaultValue={i.reason} placeholder="Reason/Destination" className='inputReason' onInput={(e)=>{
-                  updateReason(key,e.target.value)
-                }}/></> : null }
+                
 
                 { (status === "L") ? 
                 <>
@@ -130,7 +130,7 @@ export default function StaffList(stafflist) {
                       <option value="Family Care Leave">Family Care Leave</option>
                       <option value="Medical Care Leave">Medical Care Leave</option>
                       <option value="Maternity Leave">Maternity Leave</option>
-                      <option value="OIL">OIL</option>
+                      <option value="OIL">Off in Lieu</option>
                     </select>
                   </div>
                  

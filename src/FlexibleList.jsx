@@ -25,10 +25,16 @@ export default function FlexibleList(stafflist) {
     const timeInput = useRef(null)
     const addBtn = useRef(null)
     const [timePickerActive, setTimePickerActive] = useState(false)
+    const [dummy, setDummy] = useState(0)
     
     return (
     <>
-        <p className={"title "+stafflist.titleClass}>{stafflist.title}</p>
+        <p className={"title "+stafflist.titleClass}>{stafflist.title} 
+          <span className='titleBtn' ref={addBtn} onClick={()=>{
+          setModalOverlay(true)
+          timeInput.current.value = getCurentTime()
+        }}>+ Add </span>
+        </p>
         <p className="details">{"P = "+stafflist.list.filter(person => person.status === "P").length}</p>
         
         {stafflist.list.map((i, key)=>{
@@ -44,7 +50,7 @@ export default function FlexibleList(stafflist) {
                     <p className={"guestNameDetails"}>
                       {i.name+" ("+i.timeIn+")\n"}<span className="guestAppointment">{i.reason}</span>
                     </p>
-                    <Icon icon={'mingcute:minus-circle-fill'} height={24} className='destructive' onClick={()=>{
+                    <Icon icon={'mingcute:minimize-fill'} height={20} className='destructive removeGuestBtn' onClick={()=>{
                       softRemove(key)
                       setStatus("Left")
                     }}/>
@@ -96,10 +102,7 @@ export default function FlexibleList(stafflist) {
             timePickerActive ? <TimePicker setActivity={setTimePickerActive} ref={timeInput} /> : null
           }
         </div>
-        <button ref={addBtn} onClick={()=>{
-          setModalOverlay(true)
-          timeInput.current.value = getCurentTime()
-        }}>Add</button>
+        
     </>
     )
 }

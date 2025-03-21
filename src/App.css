@@ -5,7 +5,7 @@
 }
 
 html, body {
-  background: #121212;
+  background: #0c0c0c;
 }
 
 #root {
@@ -27,16 +27,21 @@ p {
   font-size: 1.8rem;
   font-weight: 700;
   color: hsla(39, 100%, 63%, 0.918);
+  text-align: center;
 }
 .title {
   font-size: 1.5rem;
   font-weight: 500;
   color: #fff;
   margin-bottom: 0rem;
-  margin-top: 2rem;
+  margin-top: 3rem;
+  text-align: center;
 }
+/* .title:has(span) {
+  text-align: left;
+} */
 .firstItemTitle {
-  margin-top: 0rem;
+  margin-top: 1rem;
 }
 .copyBtn {
   margin-top: 3rem;
@@ -44,11 +49,12 @@ p {
 
 
 .details {
-  font-size: 1rem;
+  font-size: 0.8rem;
   font-weight: 400;
-  color: #fff;
-  margin-bottom: 1rem;
+  color: rgba(255, 255, 255, 0.3);
+  /* margin-bottom: 0.2rem; */
   margin-top: -0.5rem;
+  text-align: center;
 }
 
 .staffListItem {
@@ -56,7 +62,7 @@ p {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0.6rem 1rem 0.6rem 1rem;
+  padding: 0.6rem 0.5rem 0.6rem 1rem;
   background-color: rgba(255, 255, 255, 0.01);
   width: 32rem;
   border-radius: 1rem;
@@ -182,10 +188,10 @@ p {
   background-color: rgba(255, 255, 255, 0.05);
 }
 
-.staffListItemContainer {
+/* .staffListItemContainer {
   display: flex;
   gap: 0.5rem;
-}
+} */
 
 .nameStatus {
   display: flex;
@@ -201,30 +207,40 @@ input {
   padding: 0.5rem;
   border-radius: 0.5rem;
   border: 1px solid rgba(255, 255, 255, 0.0);
-  background-color: rgba(0, 0, 0, 0.2);
-  color: #fff;
+  /* background-color: rgba(0, 0, 0, 0.2); */
+  background-color: rgba(255, 255, 255, 0.02);
+
+  color: rgba(255, 255, 255, 0.7);
   width: 4rem;
   text-align: center;
+  height: 2.1rem;
 }
 input::placeholder {
-  color: #fff;
-  opacity: 0.3;
+  color: rgb(255, 255, 255);
+  opacity: 0.2;
   font-style: italic;
   font-weight: 200;
-  padding-left: 0.2rem;
+  /* padding-left: 0.2rem; */
 }
 
 input.inputReason {
   text-align: left;
   flex-grow: 1;
-  min-width: 20rem;
+  /* min-width: 20rem; */
   padding: 0.8rem 0.8rem;
+  height: 2.1rem;
 }
 .OS ~ .changeStatusButtonContainer > input.inputReason {
-  min-width: 20rem;
+  /* min-width: 20rem; */
   margin-bottom: 0.5rem;
 }
 
+.timeInputContainer {
+  right: 0;
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+}
 .inputHH {
   margin-left: 0rem;
 }
@@ -289,6 +305,26 @@ option {
   opacity: 0.5
 }
 
+
+p.title {
+  position: relative;
+}
+.titleBtn {
+  margin-top: 0.15rem;
+  position: absolute;
+  right: 0;
+  margin-left: auto;
+  padding: 0.4rem 0.8rem;
+  background-color: rgba(66, 132, 255, 0.897);
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #1a1a1a;
+  border-radius: 10rem;
+  cursor: pointer;
+}
+.titleBtn:active {
+  opacity: 0.6;
+}
 
 
 .hide {

@@ -2,8 +2,9 @@ import React, { useState } from 'react'
 import { staffs } from './staffs'
 import StaffList from './StaffList'
 import FlexibleList from './FlexibleList'
+import ExecutiveList from './ExecutiveList'
 import { loadData, staff, updateStaff } from './components/process/LocalStorageHandler'
-import TimePicker from './TimePicker'
+// import TimePicker from './TimePicker'
 import './App.css'
 
 
@@ -87,9 +88,24 @@ export default function App() {
         finalOutput += person.name+" - "+((person.status === "L") ? ((person.leaveType === "") ? "Leave" : person.leaveType ) : person.status)+" "+((person.timeIn === "") ? "" : "("+person.timeIn+") ")+person.reason+"\n"
       })
   
-      finalOutput += "\n*Reporting to Executives\n\nExpert Developers/Engineers\nN/A\n\nExecutive Board Members\nN/A\n\n"
-      finalOutput += "Guests/Others\n"
+      finalOutput += "\n*Reporting to Executives\n\nExpert Developers/Engineers\nN/A\n\n"
       
+
+      finalOutput += "Executive Board Members\n"
+      let execCounter = 0;
+      staff.executives
+      .filter(person => person.status === "P") // Filter only those with status "P"
+      .forEach(person => { 
+        finalOutput += person.name + " (" + person.position + ") - P " + ((person.timeIn === "") ? "" : "(" + person.timeIn + ")") + "\n";
+        execCounter++;
+      });
+      if (execCounter === 0) {
+        finalOutput += "N/A\n";
+      }
+      finalOutput += "\n"
+
+      
+      finalOutput += "Guests/Others\n"
       let guestCounter = 0;
       staff.others
       .filter(person => person.status === "P") // Filter only those with status "P"
@@ -121,6 +137,7 @@ export default function App() {
       <StaffList title="Software Developers and Designers" list={staff.softwareDevelopersDesigners} />
       <StaffList title="Project Leaders" list={staff.projectLeaders} />
       <StaffList title="Reporting to CTO" list={staff.reportingToCTO} />
+      <ExecutiveList title="Board Members" list={staff.executives} />
       <FlexibleList title="Guests/Others" list={staff.others} />
       
       <button className="copyBtn" onClick={() => updateFinalOutput()}>Copy Attendance</button>
