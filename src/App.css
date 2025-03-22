@@ -20,7 +20,8 @@ html, body {
 p {
   white-space: pre-wrap;
 }
-#root:has(.timePickerOverlay.active) {
+#root:has(.timePickerOverlay.active),
+#root:has(.modalOverlay.active) {
   touch-action: none;
 }
 .mainTitle {
@@ -324,6 +325,11 @@ p.title {
 }
 .titleBtn:active {
   opacity: 0.6;
+}
+
+.copyIcon {
+  margin-left: -0.3rem;
+  transform: translateY(0.25rem);
 }
 
 

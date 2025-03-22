@@ -1,34 +1,5 @@
 
-.modalOverlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background-color: rgba(0, 0, 0, 0.8);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 100;
-  }
-  .modalCard {
-    /* height: 20rem; */
-    width: min(30rem, calc(100dvw - 2rem));
-    background-color: rgb(15, 15, 15);
-    border-radius: 1rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 1rem 2rem;
-  }
-  .modalOverlay.inactive {
-    display: none;
-  }
-  .modalOverlay.active {
-    display: flex;
-  }
+
   .w-full {
     width: 100%;
   }
@@ -36,101 +7,42 @@
     text-align: left;
     height: 2.5rem;
   }
-  .header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    height: 3rem;
-    margin-bottom: 0.5rem;
-  }
-  .header > p {
-    margin: 0;
-  }
   
-  .closeIcon {
-    cursor: pointer;
-    transition: 100ms;
-    opacity: 0.2;
-  }
-  .closeIcon:hover {
-    opacity: 0.4;
-  }
-  .guestDetailsContainer {
-    display: flex;
-    gap: 0.5rem;
-    width: 100%;
-    justify-content: space-between;
-  }
+.guestDetailsContainer {
+  display: flex;
+  gap: 0.5rem;
+  width: 100%;
+  justify-content: space-between;
+}
 .guestDetailsContainer > .inputHH {
   height: 2.5rem;
 }
 
-  .actionButtons {
-    display: flex;
-    gap: 0.5rem;
-    width: 100%;
-    justify-content: space-between;
-    margin-top: 2rem;
-    margin-bottom: 1rem;
-  }
-  .actionButtons > button {
-    flex-grow: 1;
-  }
-
-  .actionButtons > .cancel {
-    color: rgba(255, 255, 255, 0.5);
-  }
-
-  .guestNameDetails {
-    margin-left: 0.5rem;
-  }
-  .guestAppointment {
-    font-size: 0.8rem;
-    opacity: 0.5;
-  }
-
-  .guestListHeader {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    gap: 0.5rem;
-    width: 100%;
-    padding-right: 0.2rem;
-
-  }
-
-  .guestListHeader > .destructive {
-    cursor: pointer;
-    opacity: 0.5;
-  }
-
-  .guestListHeader > .destructive:hover {
-    opacity: 0.8;
-  }
-  .removeGuestBtn {
-    margin-right: 0.2rem;
-  }
-
-
-
-  @media only screen and (max-width: 600px) {
-    .modalCard {
-      /* height: 20rem; */
-      width: min(30rem, calc(100dvw - 2rem));
-      background-color: rgb(15, 15, 15);
-      border-radius: 1rem;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-start;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 0.6rem 1.5rem;
-    }
-    .actionButtons {
-      margin-top: 1rem;
-      margin-bottom: 0.6rem;
-    }
   
-  }
 
+.guestNameDetails {
+  margin-left: 0.5rem;
+}
+.guestAppointment {
+  font-size: 0.8rem;
+  opacity: 0.5;
+}
+.guestListHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 0.5rem;
+  width: 100%;
+  padding-right: 0.2rem;
+}
+
+.guestListHeader > .destructive {
+  cursor: pointer;
+  opacity: 0.5;
+}
+.guestListHeader > .destructive:hover {
+  opacity: 0.8;
+}
+.removeGuestBtn {
+  margin-right: 0.2rem;
+}

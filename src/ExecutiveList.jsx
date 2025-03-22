@@ -88,14 +88,10 @@ export default function ExecutiveList(stafflist) {
             
             <div className={"modalOverlay "+(modalOverlay ? "active" : "inactive")} >
               <div className="modalCard" onClick={(e)=>{e.stopPropagation()}}>
-                <div className="header">
                   <p className="title">Available Board Members</p>
-                  {/* <Icon icon="mingcute:close-circle-fill" className="closeIcon" height={32} onClick={()=>{setModalOverlay(false)}}/> */}
-                </div>
+                  <div className="modalBody">
                 {stafflist.list.map((i, key)=>{
                     const [stat, setStat] = useState(i.status)
-                        
-                        
                     if (i.status !== "P") {
                       return (
                         <div key={key} className="executives"  onClick={()=>{
@@ -105,37 +101,20 @@ export default function ExecutiveList(stafflist) {
                           setDummy(dummy+1)
                           setModalOverlay(false)
                         }}>
-                          
                           <div className="execListItem">
                             <div className="execListHeader">
                               <p className={"execNameDetails"}>
                                 {i.name+"\n"}<span className="execAppointment">{i.position}</span>
                               </p>
-                              {/* <Icon icon={'mingcute:add-fill'} height={20} className='addExec iconBtn' onClick={()=>{
-                                updateTimeIn(key,getCurentTime())
-                                toggle(key)
-                                setStat("P")
-                                setDummy(dummy+1)
-                              }}/> */}
                             </div>
-                            
-                            
                           </div>
                         </div>
                       )
                     }
-                    
                   }) }
-                
-                
-                <div className="actionButtons">
-                  <button className='cancel' onClick={()=>{setModalOverlay(false)}}>Close</button>
-                  
                 </div>
-                
+                <button className='primary' onClick={()=>{setModalOverlay(false)}}>Close</button>  
               </div>
-    
-              
             </div>
 
         </>
