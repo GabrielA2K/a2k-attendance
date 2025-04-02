@@ -17,6 +17,8 @@ export default function StaffList(stafflist) {
           stafflist.list[key].status = toStatus
         }   
         saveData(staff)
+
+        stafflist.trigger();
         // console.log(JSON.parse(localStorage.getItem("staffData")))
         // console.log(i)
       }

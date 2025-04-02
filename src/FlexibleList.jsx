@@ -10,6 +10,8 @@ export default function FlexibleList(stafflist) {
     const softRemove = (key) => {
         stafflist.list[key].status = "Left"
         saveData(staff)
+        stafflist.trigger();
+
         // console.log(JSON.parse(localStorage.getItem("staffData")))
       }
     const getCurentTime = () => {
@@ -85,6 +87,7 @@ export default function FlexibleList(stafflist) {
                 if (guestNameInput.current?.value !== "") {
                   stafflist.list.push({name: guestNameInput.current?.value, status: "P", timeIn: timeInput.current?.value, reason: guestAppointmentInput.current?.value, leaveType: ""})
                   saveData(staff)
+                  stafflist.trigger();
                   window.location.reload()
                   addBtn.current?.scrollIntoView()
                 } else {

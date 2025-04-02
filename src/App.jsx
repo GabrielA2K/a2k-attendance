@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { staffs } from './staffs'
 import StaffList from './StaffList'
 import ExecutiveList from './ExecutiveList'
@@ -32,7 +32,6 @@ try {
   initializeLocalStaffData()
   updateStaff(loadData())
 }
-
 
 
 
@@ -140,15 +139,51 @@ export default function App() {
   }
 
 
+  const [totalStaff, setTotalStaff] = useState(0)
+  const [totalPresent, setTotalPresent] = useState(countOverallStaff(staff,"P"))
+  const [totalLeave, setTotalLeave] = useState(countOverallStaff(staff,"L"))
+  const [totalWFH, setTotalWFH] = useState(countOverallStaff(staff,"WFH"))
+  const [totalOS, setTotalOS] = useState(countOverallStaff(staff,"OS"))
+
+  const [dummy, setDummy] = useState(0)
+  const triggerRerender = () => {
+    setDummy((prev) => prev + 1);
+  }
+
+  useEffect(() => {
+    setTotalPresent(countOverallStaff(staff,"P"))
+    setTotalLeave(countOverallStaff(staff,"L") + countOverallStaff(staff,"A"))
+    setTotalWFH(countOverallStaff(staff,"WFH"))
+    setTotalOS(countOverallStaff(staff,"OS"))
+    setTotalStaff(countOverallStaff(staff,"P") + countOverallStaff(staff,"L") + countOverallStaff(staff,"A") + countOverallStaff(staff,"WFH") + countOverallStaff(staff,"OS") + countOverallStaff(staff,""))
+    console.log("Total Present: ", Math.round(totalPresent / totalStaff * 100))
+    console.log("Total Leave: ", Math.round(totalLeave / totalStaff * 100))
+    console.log("Total WFH: ", Math.round(totalWFH / totalStaff * 100))
+    console.log("Total OS: ", Math.round(totalOS / totalStaff * 100))
+    console.log("Total Staff: ", totalStaff)
+  });
+
+
+  
+  
   return (
     <>
       <p className='mainTitle'>DDO Attendance Helper</p>
-      <StaffList titleClass={"firstItemTitle"} title="On the Job Trainees" list={staff.onTheJobTrainees} />
-      <StaffList title="Software Developers and Designers" list={staff.softwareDevelopersDesigners} />
-      <StaffList title="Project Leaders" list={staff.projectLeaders} />
-      <StaffList title="Reporting to CTO" list={staff.reportingToCTO} />
-      <ExecutiveList title="Board Members" list={staff.executives} />
-      <FlexibleList title="Guests/Others" list={staff.others} />
+      <div className="pieChart" 
+      style={
+        {
+          "--present": `${totalPresent / totalStaff * 100}%`, 
+          "--wfh": `${totalWFH / totalStaff * 100}%`,
+          "--leave": `${totalLeave / totalStaff * 100}%`,
+          "--os": `${totalOS / totalStaff * 100}%`
+        }
+      }></div>
+      <StaffList titleClass={"firstItemTitle"} title="On the Job Trainees" list={staff.onTheJobTrainees} trigger={triggerRerender} />
+      <StaffList title="Software Developers and Designers" list={staff.softwareDevelopersDesigners} trigger={triggerRerender} />
+      <StaffList title="Project Leaders" list={staff.projectLeaders} trigger={triggerRerender} />
+      <StaffList title="Reporting to CTO" list={staff.reportingToCTO} trigger={triggerRerender} />
+      <ExecutiveList title="Board Members" list={staff.executives} trigger={triggerRerender} />
+      <FlexibleList title="Guests/Others" list={staff.others} trigger={triggerRerender} />
       
       <button className="copyBtn" onClick={() => copyToClipboard( updateFinalOutput())}>Copy Attendance</button>
       <button className='destructive' onClick={() => resetStaffData()}>Reset</button>

@@ -336,6 +336,36 @@ p.title {
 .hide {
   display: none;
 }
+
+
+.pieChart {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  width: 6rem;
+  /* background-color: red; */
+  align-self: center;
+  border-radius: 50%;
+  background: conic-gradient(from 30deg,
+    #62fd77 0% var(--present),
+    #fcb962 0 calc(var(--present) + var(--wfh)),
+    #f55b7d 0 calc(calc(var(--present) + var(--wfh)) + var(--leave)),
+    #8cb0ff 0 calc(calc(calc(var(--present) + var(--wfh)) + var(--leave)) + var(--os)),
+    rgba(255,255,255,0.05) 0
+  );
+}
+.pieChart::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  aspect-ratio: 1 / 1;
+  width: 67%;
+  background-color: #0c0c0c;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+}
+
+
 @media only screen and (max-width: 600px) {
   .staffListItem {
     flex-direction: column;

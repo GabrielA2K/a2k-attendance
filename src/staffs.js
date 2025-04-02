@@ -3,8 +3,8 @@
 export const staffs = {
     onTheJobTrainees: [
       { name: "Jose Elijah Tubig", status: "", timeIn: "", reason: "", leaveType: "" },
-      { name: "Vien Arman L. Cabrera", status: "", timeIn: "", reason: "", leaveType: "" },
-      { name: "Rowie S. Nabong", status: "", timeIn: "", reason: "", leaveType: "" },
+      { name: "Vien Arman Cabrera", status: "", timeIn: "", reason: "", leaveType: "" },
+      { name: "Rowie Nabong", status: "", timeIn: "", reason: "", leaveType: "" },
       { name: "Marc Carlos Gozun", status: "", timeIn: "", reason: "", leaveType: "" },
       { name: "Gabriel Meridor", status: "", timeIn: "", reason: "", leaveType: "" },
       { name: "John Arnie Mallari", status: "", timeIn: "", reason: "", leaveType: "" },
@@ -29,23 +29,22 @@ export const staffs = {
     projectLeaders: [
       { name: "Franklin Sula", status: "", timeIn: "", reason: "", leaveType: "" },
       { name: "Aldrich Bondoc", status: "", timeIn: "", reason: "", leaveType: "" },
-      { name: "Mark Liwanag", status: "", timeIn: "", reason: "", leaveType: "" },
-      { name: "Vincent Cumayas", status: "", timeIn: "", reason: "", leaveType: "" }
+      { name: "Mark Liwanag", status: "", timeIn: "", reason: "", leaveType: "" }
     ],
     reportingToCTO: [
       { name: "Evelyn Layson", status: "", timeIn: "", reason: "", leaveType: "" },
       { name: "Alonzo Pamintuan", status: "", timeIn: "", reason: "", leaveType: "" }
     ],
     executives: [
-      { name: "Jasdeep Sandhu", position: "Chairman", status: "", timeIn: "", reason: "", leaveType: "" },
-      { name: "Daniel Jimenez", position: "CEO", status: "", timeIn: "", reason: "", leaveType: "" },
-      { name: "Mark Nuqui", position: "COO", status: "", timeIn: "", reason: "", leaveType: "" },
-      { name: "Jhon Nuqui", position: "CTO", status: "", timeIn: "", reason: "", leaveType: "" },
-      { name: "Ma. Ronna Silos", position: "CFO", status: "", timeIn: "", reason: "", leaveType: "" },
-      { name: "Charlotte Bondoc", position: "CPO", status: "", timeIn: "", reason: "", leaveType: "" }
+      { name: "Jasdeep Sandhu", position: "Chairman", status: "Left", timeIn: "", reason: "", leaveType: "" },
+      { name: "Daniel Jimenez", position: "CEO", status: "Left", timeIn: "", reason: "", leaveType: "" },
+      { name: "Mark Nuqui", position: "COO", status: "Left", timeIn: "", reason: "", leaveType: "" },
+      { name: "Jhon Nuqui", position: "CTO", status: "Left", timeIn: "", reason: "", leaveType: "" },
+      { name: "Ma. Ronna Silos", position: "CFO", status: "Left", timeIn: "", reason: "", leaveType: "" },
+      { name: "Charlotte Bondoc", position: "CPO", status: "Left", timeIn: "", reason: "", leaveType: "" }
     ],
     others: [],
     dataVersion: [
-      { version: "1.0.6", name: "", status: "", timeIn: "", reason: "", leaveType: "" }
+      { version: "1.0.7", name: "", status: "Left", timeIn: "", reason: "", leaveType: "" }
     ]
 };

@@ -9,11 +9,12 @@ export default function ExecutiveList(stafflist) {
     
     const toggle = (key) => {
       if (stafflist.list[key].status === "P") {
-        stafflist.list[key].status = ""
+        stafflist.list[key].status = "Left"
       } else {
         stafflist.list[key].status = "P"
       }
       saveData(staff)
+      stafflist.trigger();
       // console.log(JSON.parse(localStorage.getItem("staffData")))
     }
     const getCurentTime = () => {
@@ -59,7 +60,7 @@ export default function ExecutiveList(stafflist) {
                         </p>
                         <Icon icon={'mingcute:minimize-fill'} height={20} className='iconBtn destructive removeExec' onClick={()=>{
                           toggle(key)
-                          setStatus("")
+                          setStatus("Left")
                           setDummy(dummy+1)
                         }}/>
                         
