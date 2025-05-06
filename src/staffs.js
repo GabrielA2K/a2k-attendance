@@ -14,7 +14,6 @@ export const staffs = {
       { name: "Steven Carillo", status: "", timeIn: "", reason: "", leaveType: "" },
       { name: "Iliana Castillo", status: "", timeIn: "", reason: "", leaveType: "" },
       { name: "Marisse Lopez", status: "", timeIn: "", reason: "", leaveType: "" },
-      { name: "Phrygian Moreno", status: "", timeIn: "", reason: "", leaveType: "" },
       { name: "Leonito Talion", status: "", timeIn: "", reason: "", leaveType: "" },
       { name: "Knat Salvador", status: "", timeIn: "", reason: "", leaveType: "" }
     ],
@@ -45,6 +44,6 @@ export const staffs = {
     ],
     others: [],
     dataVersion: [
-      { version: "1.0.7", name: "", status: "Left", timeIn: "", reason: "", leaveType: "" }
+      { version: "1.0.8", name: "", status: "Left", timeIn: "", reason: "", leaveType: "" }
     ]
 };
