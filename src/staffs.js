@@ -2,9 +2,7 @@
 
 export const staffs = {
     onTheJobTrainees: [
-      { name: "Jose Elijah Tubig", status: "", timeIn: "", reason: "", leaveType: "" },
       { name: "Vien Arman Cabrera", status: "", timeIn: "", reason: "", leaveType: "" },
-      { name: "Rowie Nabong", status: "", timeIn: "", reason: "", leaveType: "" },
       { name: "Marc Carlos Gozun", status: "", timeIn: "", reason: "", leaveType: "" },
       { name: "Gabriel Meridor", status: "", timeIn: "", reason: "", leaveType: "" },
       { name: "John Arnie Mallari", status: "", timeIn: "", reason: "", leaveType: "" },
@@ -14,8 +12,7 @@ export const staffs = {
       { name: "Steven Carillo", status: "", timeIn: "", reason: "", leaveType: "" },
       { name: "Iliana Castillo", status: "", timeIn: "", reason: "", leaveType: "" },
       { name: "Marisse Lopez", status: "", timeIn: "", reason: "", leaveType: "" },
-      { name: "Leonito Talion", status: "", timeIn: "", reason: "", leaveType: "" },
-      { name: "Knat Salvador", status: "", timeIn: "", reason: "", leaveType: "" }
+      { name: "Leonito Talion", status: "", timeIn: "", reason: "", leaveType: "" }
     ],
     associateDevelopers: [],
     softwareDevelopersDesigners: [
@@ -44,6 +41,6 @@ export const staffs = {
     ],
     others: [],
     dataVersion: [
-      { version: "1.0.8", name: "", status: "Left", timeIn: "", reason: "", leaveType: "" }
+      { version: "1.0.9", name: "", status: "Left", timeIn: "", reason: "", leaveType: "" }
     ]
 };
