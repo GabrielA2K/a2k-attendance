@@ -4,10 +4,7 @@ export const staffs = {
     onTheJobTrainees: [
       { name: "Marc Carlos Gozun", status: "", timeIn: "", reason: "", leaveType: "" },
       { name: "Jaycee Cruz", status: "", timeIn: "", reason: "", leaveType: "" },
-      { name: "Salmer Castro", status: "", timeIn: "", reason: "", leaveType: "" },
-      { name: "Charles Bercasio", status: "", timeIn: "", reason: "", leaveType: "" },
       { name: "Steven Carillo", status: "", timeIn: "", reason: "", leaveType: "" },
-      { name: "Iliana Castillo", status: "", timeIn: "", reason: "", leaveType: "" },
       { name: "Marisse Lopez", status: "", timeIn: "", reason: "", leaveType: "" },
       { name: "Leonito Talion", status: "", timeIn: "", reason: "", leaveType: "" }
     ],
@@ -38,6 +35,6 @@ export const staffs = {
     ],
     others: [],
     dataVersion: [
-      { version: "1.0.10", name: "", status: "Left", timeIn: "", reason: "", leaveType: "" }
+      { version: "1.0.11", name: "", status: "Left", timeIn: "", reason: "", leaveType: "" }
     ]
 };
