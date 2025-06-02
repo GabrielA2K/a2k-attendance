@@ -5,10 +5,12 @@ export const staffs = {
       
       { name: "Marisse Lopez", status: "", timeIn: "", reason: "", leaveType: "" }
     ],
-    associateDevelopers: [
+    assistantDevelopers: [
       { name: "Marc Carlos Gozun", status: "", timeIn: "", reason: "", leaveType: "" },
       { name: "Gabriel Meridor", status: "", timeIn: "", reason: "", leaveType: "" },
       { name: "Charles Bercasio", status: "", timeIn: "", reason: "", leaveType: "" }
+    ],
+    associateDevelopers: [
     ],
     softwareDevelopersDesigners: [
       { name: "MC Karl Javier", status: "", timeIn: "", reason: "", leaveType: "" },
@@ -36,6 +38,6 @@ export const staffs = {
     ],
     others: [],
     dataVersion: [
-      { version: "1.0.14", name: "", status: "Left", timeIn: "", reason: "", leaveType: "" }
+      { version: "1.0.15", name: "", status: "Left", timeIn: "", reason: "", leaveType: "" }
     ]
 };
