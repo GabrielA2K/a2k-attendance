@@ -52,7 +52,7 @@ export default function StaffList(stafflist) {
     return (
     <>
         <p className={"title "+stafflist.titleClass}>{stafflist.title}</p>
-        <p className="details">{"P = "+stafflist.list.filter(person => person.status === "P").length+(stafflist.title === "On the Job Trainees" ? (" / A = "+stafflist.list.filter(person => person.status === "A").length): (" / L = "+stafflist.list.filter(person => person.status === "L").length)+" / TO = 0")+" / WFH = "+stafflist.list.filter(person => person.status === "WFH").length+" / OS = "+stafflist.list.filter(person => person.status === "OS").length}</p>
+        <p className="details">{"P = "+stafflist.list.filter(person => person.status === "P").length+((stafflist.title === "On the Job Trainees" || stafflist.title === "Assistant Developers and Designers") ? (" / A = "+stafflist.list.filter(person => person.status === "A").length): (" / L = "+stafflist.list.filter(person => person.status === "L").length)+" / TO = 0")+" / WFH = "+stafflist.list.filter(person => person.status === "WFH").length+" / OS = "+stafflist.list.filter(person => person.status === "OS").length}</p>
         
         {stafflist.list.map((i, key)=>{
           const [status, setStatus] = useState(i.status)
@@ -87,11 +87,11 @@ export default function StaffList(stafflist) {
                       setTimePickerActive(true)
                     }
                   }}>OS</p>
-                  <p className={(stafflist.title === "On the Job Trainees" ? "hide ": "")+statusClassCheck(status,"L")} onClick={()=>{
+                  <p className={((stafflist.title === "On the Job Trainees" || stafflist.title === "Assistant Developers and Designers") ? "hide ": "")+statusClassCheck(status,"L")} onClick={()=>{
                     toggleStatus(key,i.status,"L")
                     setStatus(i.status)
                   }}>Leave</p>
-                  <p className={(stafflist.title !== "On the Job Trainees" ? "hide ": "")+statusClassCheck(status,"A")} onClick={()=>{
+                  <p className={(!(stafflist.title === "On the Job Trainees" || stafflist.title === "Assistant Developers and Designers") ? "hide ": "")+statusClassCheck(status,"A")} onClick={()=>{
                     toggleStatus(key,i.status,"A")
                     setStatus(i.status)
                   }}>Absent</p>

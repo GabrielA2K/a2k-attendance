@@ -79,9 +79,9 @@ export default function App() {
         finalOutput += person.name+" - "+((person.status === "A") ? ((person.leaveType === "") ? "A" : person.leaveType ) : person.status)+" "+((person.timeIn === "") ? "" : "("+person.timeIn+") ")+person.reason+"\n"
       })
 
-      finalOutput += "\nAssistant Developers/Designers (P="+staff.associateDevelopers.filter(person => person.status === "P").length+"/L="+staff.associateDevelopers.filter(person => person.status === "L").length+"/TO=0/WFH="+staff.associateDevelopers.filter(person => person.status === "WFH").length+"/OS="+staff.associateDevelopers.filter(person => person.status === "OS").length+")\n" 
+      finalOutput += "\nAssistant Developers/Designers (P="+staff.assistantDevelopers.filter(person => person.status === "P").length+"/A="+staff.assistantDevelopers.filter(person => person.status === "A").length+"/TO=0/WFH="+staff.assistantDevelopers.filter(person => person.status === "WFH").length+"/OS="+staff.assistantDevelopers.filter(person => person.status === "OS").length+")\n" 
       staff.assistantDevelopers.forEach((person) => {
-        finalOutput += person.name+" - "+((person.status === "L") ? ((person.leaveType === "") ? "Leave" : person.leaveType ) : person.status)+" "+((person.timeIn === "") ? "" : "("+person.timeIn+") ")+person.reason+"\n"
+        finalOutput += person.name+" - "+((person.status === "A") ? ((person.leaveType === "") ? "A" : person.leaveType ) : person.status)+" "+((person.timeIn === "") ? "" : "("+person.timeIn+") ")+person.reason+"\n"
       })
       
   
@@ -128,7 +128,7 @@ export default function App() {
         finalOutput += "N/A\n";
       }
       
-      finalOutput += "\nOverall Leave: "+countOverallStaff(staff,"L")+"\nOverall OJT Absent: "+countOverallStaff(staff,"A")+"\nOverall OS: "+countOverallStaff(staff,"OS")+"\nOverall TO: 0\nOverall WFH: "+countOverallStaff(staff,"WFH")+"\nOverall Office: "+countOverallStaff(staff,"P")
+      finalOutput += "\nOverall Leave: "+countOverallStaff(staff,"L")+"\nOverall Absent: "+countOverallStaff(staff,"A")+"\nOverall OS: "+countOverallStaff(staff,"OS")+"\nOverall TO: 0\nOverall WFH: "+countOverallStaff(staff,"WFH")+"\nOverall Office: "+countOverallStaff(staff,"P")
       
       console.log(finalOutput)
       return finalOutput
