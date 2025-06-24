@@ -3,7 +3,7 @@
 export const staffs = {
     onTheJobTrainees: [
       
-      { name: "Marisse Lopez", status: "", timeIn: "", reason: "", leaveType: "" }
+      
     ],
     assistantDevelopers: [
       { name: "Marc Carlos Gozun", status: "", timeIn: "", reason: "", leaveType: "" },
@@ -39,6 +39,6 @@ export const staffs = {
     ],
     others: [],
     dataVersion: [
-      { version: "1.0.17", name: "", status: "Left", timeIn: "", reason: "", leaveType: "" }
+      { version: "1.0.18", name: "", status: "Left", timeIn: "", reason: "", leaveType: "" }
     ]
 };
