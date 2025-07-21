@@ -9,7 +9,8 @@ export const staffs = {
       { name: "Marc Carlos Gozun", status: "", timeIn: "", reason: "", leaveType: "" },
       { name: "Gabriel Meridor", status: "", timeIn: "", reason: "", leaveType: "" },
       { name: "Charles Bercasio", status: "", timeIn: "", reason: "", leaveType: "" },
-      { name: "Jose Elijah Tubig", status: "", timeIn: "", reason: "", leaveType: "" }
+      { name: "Jose Elijah Tubig", status: "", timeIn: "", reason: "", leaveType: "" },
+      { name: "Iliana Castillo", status: "", timeIn: "", reason: "", leaveType: "" }
     ],
     associateDevelopers: [
     ],
@@ -39,6 +40,6 @@ export const staffs = {
     ],
     others: [],
     dataVersion: [
-      { version: "1.0.18", name: "", status: "Left", timeIn: "", reason: "", leaveType: "" }
+      { version: "1.0.19", name: "", status: "Left", timeIn: "", reason: "", leaveType: "" }
     ]
 };
