@@ -22,6 +22,8 @@ export default function StaffList(stafflist) {
         // console.log(JSON.parse(localStorage.getItem("staffData")))
         // console.log(i)
       }
+
+    const [dummy, setDummy] = useState(0)
     
     const updateTimeIn = (key,timeIn) => {
       stafflist.list[key].timeIn = timeIn
@@ -52,8 +54,8 @@ export default function StaffList(stafflist) {
     return (
     <>
         <p className={"title "+stafflist.titleClass}>{stafflist.title}</p>
-        <p className="details">{"P = "+stafflist.list.filter(person => person.status === "P").length+((stafflist.title === "On the Job Trainees" || stafflist.title === "Assistant Developers and Designers") ? (" / A = "+stafflist.list.filter(person => person.status === "A").length): (" / L = "+stafflist.list.filter(person => person.status === "L").length)+" / TO = 0")+" / WFH = "+stafflist.list.filter(person => person.status === "WFH").length+" / OS = "+stafflist.list.filter(person => person.status === "OS").length}</p>
-        
+        <p className={"details "+dummy}>{"P = "+stafflist.list.filter(person => person.status === "P").length+((stafflist.title === "On the Job Trainees" || stafflist.title === "Assistant Developers and Designers") ? (" / A = "+stafflist.list.filter(person => person.status === "A").length): (" / L = "+stafflist.list.filter(person => (person.status === "L" && person.leaveType !== "TO")).length)+" / TO = "+stafflist.list.filter(person => person.leaveType === "TO").length)+" / WFH = "+stafflist.list.filter(person => person.status === "WFH").length+" / OS = "+stafflist.list.filter(person => person.status === "OS").length}</p>
+
         {stafflist.list.map((i, key)=>{
           const [status, setStatus] = useState(i.status)
           const timeInput = useRef(null)
@@ -125,14 +127,16 @@ export default function StaffList(stafflist) {
                     updateLeave(key,e.target.value)
                   }}/> */}
                   <div className="selectContainer" onChange={(e)=>{
-                    updateLeave(key,e.target.value)}}>
+                    updateLeave(key,e.target.value)
+                    setDummy(dummy+1)}}>
                     <select defaultValue={i.leaveType} name="leave" id="" className='leaveSelect'>
                       <option value="Leave">Leave</option>
                       <option value="Sick Leave">Sick Leave</option>
                       <option value="Family Care Leave">Family Care Leave</option>
                       <option value="Medical Care Leave">Medical Care Leave</option>
                       <option value="Maternity Leave">Maternity Leave</option>
-                      <option value="OIL">Off in Lieu</option>
+                      <option value="OIL">Off in Lieu (OIL)</option>
+                      <option value="TO">Time Off/Out (TO)</option>
                     </select>
                   </div>
                  

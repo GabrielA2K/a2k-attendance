@@ -46,6 +46,20 @@ export default function App() {
     }
     return count;
   }
+  function countOverallStaffOnLeave(staff) {
+    let count = 0;
+    for (let category in staff) {
+      count += staff[category].filter(person => (person.status === "L" && person.leaveType !== "TO"))?.length;
+    }
+    return count;
+  }
+  function countOverallStaffOnTO(staff) {
+    let count = 0;
+    for (let category in staff) {
+      count += staff[category].filter(person => person.leaveType === "TO")?.length;
+    }
+    return count;
+  }
 
   const [copiedModal, setCopiedModal] = useState(false)
   function copyToClipboard(value) {
@@ -83,19 +97,19 @@ export default function App() {
       staff.assistantDevelopers.forEach((person) => {
         finalOutput += person.name+" - "+((person.status === "A") ? ((person.leaveType === "") ? "A" : person.leaveType ) : person.status)+" "+((person.timeIn === "") ? "" : "("+person.timeIn+") ")+person.reason+"\n"
       })
-      
-  
-      finalOutput += "\nSoftware Developers/Designers (P="+staff.softwareDevelopersDesigners.filter(person => person.status === "P").length+"/L="+staff.softwareDevelopersDesigners.filter(person => person.status === "L").length+"/TO=0/WFH="+staff.softwareDevelopersDesigners.filter(person => person.status === "WFH").length+"/OS="+staff.softwareDevelopersDesigners.filter(person => person.status === "OS").length+")\n"
+
+
+      finalOutput += "\nSoftware Developers/Designers (P="+staff.softwareDevelopersDesigners.filter(person => person.status === "P").length+"/L="+staff.softwareDevelopersDesigners.filter(person => (person.status === "L" && person.leaveType !== "TO")).length+"/TO="+staff.softwareDevelopersDesigners.filter(person => (person.leaveType === "TO")).length+"/WFH="+staff.softwareDevelopersDesigners.filter(person => person.status === "WFH").length+"/OS="+staff.softwareDevelopersDesigners.filter(person => person.status === "OS").length+")\n"
       staff.softwareDevelopersDesigners.forEach((person) => {
         finalOutput += person.name+" - "+((person.status === "L") ? ((person.leaveType === "") ? "Leave" : person.leaveType ) : person.status)+" "+((person.timeIn === "") ? "" : "("+person.timeIn+") ")+person.reason+"\n"
       })
 
-      finalOutput += "\nProject Leaders (P="+staff.projectLeaders.filter(person => person.status === "P").length+"/L="+staff.projectLeaders.filter(person => person.status === "L").length+"/TO=0/WFH="+staff.projectLeaders.filter(person => person.status === "WFH").length+"/OS="+staff.projectLeaders.filter(person => person.status === "OS").length+")\n"
+      finalOutput += "\nProject Leaders (P="+staff.projectLeaders.filter(person => person.status === "P").length+"/L="+staff.projectLeaders.filter(person => (person.status === "L" && person.leaveType !== "TO")).length+"/TO="+staff.projectLeaders.filter(person => (person.leaveType === "TO")).length+"/WFH="+staff.projectLeaders.filter(person => person.status === "WFH").length+"/OS="+staff.projectLeaders.filter(person => person.status === "OS").length+")\n"
       staff.projectLeaders.forEach((person) => {
         finalOutput += person.name+" - "+((person.status === "L") ? ((person.leaveType === "") ? "Leave" : person.leaveType ) : person.status)+" "+((person.timeIn === "") ? "" : "("+person.timeIn+") ")+person.reason+"\n"
       })
 
-      finalOutput += "\nReporting to CTO\n\n*Ops, Trg, Tech, Admin Leads (P="+staff.reportingToCTO.filter(person => person.status === "P").length+"/L="+staff.reportingToCTO.filter(person => person.status === "L").length+"/TO=0/WFH="+staff.reportingToCTO.filter(person => person.status === "WFH").length+"/OS="+staff.reportingToCTO.filter(person => person.status === "OS").length+")\n"
+      finalOutput += "\nReporting to CTO\n\n*Ops, Trg, Tech, Admin Leads (P="+staff.reportingToCTO.filter(person => person.status === "P").length+"/L="+staff.reportingToCTO.filter(person => (person.status === "L" && person.leaveType !== "TO")).length+"/TO="+staff.reportingToCTO.filter(person => (person.leaveType === "TO")).length+"/WFH="+staff.reportingToCTO.filter(person => person.status === "WFH").length+"/OS="+staff.reportingToCTO.filter(person => person.status === "OS").length+")\n"
       staff.reportingToCTO.forEach((person) => {
         finalOutput += person.name+" - "+((person.status === "L") ? ((person.leaveType === "") ? "Leave" : person.leaveType ) : person.status)+" "+((person.timeIn === "") ? "" : "("+person.timeIn+") ")+person.reason+"\n"
       })
@@ -128,7 +142,7 @@ export default function App() {
         finalOutput += "N/A\n";
       }
       
-      finalOutput += "\nOverall Leave: "+countOverallStaff(staff,"L")+"\nOverall Absent: "+countOverallStaff(staff,"A")+"\nOverall OS: "+countOverallStaff(staff,"OS")+"\nOverall TO: 0\nOverall WFH: "+countOverallStaff(staff,"WFH")+"\nOverall Office: "+countOverallStaff(staff,"P")
+      finalOutput += "\nOverall Leave: "+countOverallStaffOnLeave(staff)+"\nOverall Absent: "+countOverallStaff(staff,"A")+"\nOverall OS: "+countOverallStaff(staff,"OS")+"\nOverall TO: "+countOverallStaffOnTO(staff)+"\nOverall WFH: "+countOverallStaff(staff,"WFH")+"\nOverall Office: "+countOverallStaff(staff,"P")
       
       console.log(finalOutput)
       return finalOutput
