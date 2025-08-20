@@ -39,6 +39,6 @@ export const staffs = {
     ],
     others: [],
     dataVersion: [
-      { version: "1.0.19", name: "", status: "Left", timeIn: "", reason: "", leaveType: "" }
+      { version: "1.0.20", name: "", status: "Left", timeIn: "", reason: "", leaveType: "" }
     ]
 };
