@@ -98,6 +98,11 @@ export default function App() {
         finalOutput += person.name+" - "+((person.status === "A") ? ((person.leaveType === "") ? "A" : person.leaveType ) : person.status)+" "+((person.timeIn === "") ? "" : "("+person.timeIn+") ")+person.reason+"\n"
       })
 
+      finalOutput += "\nAssociate Developers/Designers (P="+staff.associateDevelopers.filter(person => person.status === "P").length+"/A="+staff.associateDevelopers.filter(person => person.status === "A").length+"/TO=0/WFH="+staff.associateDevelopers.filter(person => person.status === "WFH").length+"/OS="+staff.associateDevelopers.filter(person => person.status === "OS").length+")\n" 
+      staff.associateDevelopers.forEach((person) => {
+        finalOutput += person.name+" - "+((person.status === "A") ? ((person.leaveType === "") ? "A" : person.leaveType ) : person.status)+" "+((person.timeIn === "") ? "" : "("+person.timeIn+") ")+person.reason+"\n"
+      })
+
 
       finalOutput += "\nSoftware Developers/Designers (P="+staff.softwareDevelopersDesigners.filter(person => person.status === "P").length+"/L="+staff.softwareDevelopersDesigners.filter(person => (person.status === "L" && person.leaveType !== "TO")).length+"/TO="+staff.softwareDevelopersDesigners.filter(person => (person.leaveType === "TO")).length+"/WFH="+staff.softwareDevelopersDesigners.filter(person => person.status === "WFH").length+"/OS="+staff.softwareDevelopersDesigners.filter(person => person.status === "OS").length+")\n"
       staff.softwareDevelopersDesigners.forEach((person) => {
@@ -196,7 +201,7 @@ export default function App() {
       }></div>
       <StaffList titleClass={"firstItemTitle"} title="On the Job Trainees" list={staff.onTheJobTrainees} trigger={triggerRerender} />
       <StaffList title="Assistant Developers and Designers" list={staff.assistantDevelopers} trigger={triggerRerender} />
-      {/* <StaffList title="Associate Developers and Designers" list={staff.associateDevelopers} trigger={triggerRerender} /> */}
+      <StaffList title="Associate Developers and Designers" list={staff.associateDevelopers} trigger={triggerRerender} />
       <StaffList title="Software Developers and Designers" list={staff.softwareDevelopersDesigners} trigger={triggerRerender} />
       <StaffList title="Project Leaders" list={staff.projectLeaders} trigger={triggerRerender} />
       <StaffList title="Reporting to CTO" list={staff.reportingToCTO} trigger={triggerRerender} />
