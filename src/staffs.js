@@ -6,23 +6,23 @@ export const staffs = {
       
     ],
     assistantDevelopers: [
-      { name: "Gabriel Meridor", status: "", timeIn: "", reason: "", leaveType: "" },
-      { name: "Iliana Castillo", status: "", timeIn: "", reason: "", leaveType: "" }
+      { name: "Gabriel Meridor", status: "", timeIn: "", reason: "", leaveType: "" }
     ],
     associateDevelopers: [
       { name: "Charles Bercasio", status: "", timeIn: "", reason: "", leaveType: "" },
+      { name: "Iliana Castillo", status: "", timeIn: "", reason: "", leaveType: "" }
     ],
     softwareDevelopersDesigners: [
       { name: "MC Karl Javier", status: "", timeIn: "", reason: "", leaveType: "" },
       { name: "Jose Gabriel Castillo", status: "", timeIn: "", reason: "", leaveType: "" },
-      { name: "Kerby Sarcia", status: "", timeIn: "", reason: "", leaveType: "" },
       { name: "Tristan Santos", status: "", timeIn: "", reason: "", leaveType: "" }
     ],
     projectLeaders: [
       { name: "Franklin Sula", status: "", timeIn: "", reason: "", leaveType: "" },
       { name: "Aldrich Bondoc", status: "", timeIn: "", reason: "", leaveType: "" },
       { name: "Mark Liwanag", status: "", timeIn: "", reason: "", leaveType: "" },
-      { name: "Mark Leigh David", status: "", timeIn: "", reason: "", leaveType: "" }
+      { name: "Mark Leigh David", status: "", timeIn: "", reason: "", leaveType: "" },
+      { name: "Kerby Sarcia", status: "", timeIn: "", reason: "", leaveType: "" },
     ],
     reportingToCTO: [
       { name: "Evelyn Layson", status: "", timeIn: "", reason: "", leaveType: "" },
@@ -38,6 +38,6 @@ export const staffs = {
     ],
     others: [],
     dataVersion: [
-      { version: "1.0.21", name: "", status: "Left", timeIn: "", reason: "", leaveType: "" }
+      { version: "1.0.22", name: "", status: "Left", timeIn: "", reason: "", leaveType: "" }
     ]
 };
