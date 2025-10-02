@@ -6,14 +6,15 @@ export const staffs = {
       
     ],
     assistantDevelopers: [
-      { name: "Gabriel Meridor", status: "", timeIn: "", reason: "", leaveType: "" }
+
     ],
     associateDevelopers: [
       { name: "Charles Bercasio", status: "", timeIn: "", reason: "", leaveType: "" },
-      { name: "Iliana Castillo", status: "", timeIn: "", reason: "", leaveType: "" }
+      { name: "Iliana Castillo", status: "", timeIn: "", reason: "", leaveType: "" },
+      { name: "Gabriel Meridor", status: "", timeIn: "", reason: "", leaveType: "" },
     ],
     softwareDevelopersDesigners: [
-      { name: "MC Karl Javier", status: "", timeIn: "", reason: "", leaveType: "" },
+      { name: "Mc Karl Kennedy Javier", status: "", timeIn: "", reason: "", leaveType: "" },
       { name: "Jose Gabriel Castillo", status: "", timeIn: "", reason: "", leaveType: "" },
       { name: "Tristan Santos", status: "", timeIn: "", reason: "", leaveType: "" },
       { name: "Franklin Sula", status: "", timeIn: "", reason: "", leaveType: "" },
@@ -39,6 +40,6 @@ export const staffs = {
     ],
     others: [],
     dataVersion: [
-      { version: "1.0.23", name: "", status: "Left", timeIn: "", reason: "", leaveType: "" }
+      { version: "1.0.24", name: "", status: "Left", timeIn: "", reason: "", leaveType: "" }
     ]
 };
