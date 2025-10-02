@@ -114,7 +114,7 @@ export default function App() {
         finalOutput += person.name+" - "+((person.status === "L") ? ((person.leaveType === "") ? "Leave" : person.leaveType ) : person.status)+" "+((person.timeIn === "") ? "" : "("+person.timeIn+") ")+person.reason+"\n"
       })
 
-      finalOutput += "\nReporting to CTO\n\n*Ops, Trg, Tech, Admin Leads (P="+staff.reportingToCTO.filter(person => person.status === "P").length+"/L="+staff.reportingToCTO.filter(person => (person.status === "L" && person.leaveType !== "TO")).length+"/TO="+staff.reportingToCTO.filter(person => (person.leaveType === "TO")).length+"/WFH="+staff.reportingToCTO.filter(person => person.status === "WFH").length+"/OS="+staff.reportingToCTO.filter(person => person.status === "OS").length+")\n"
+      finalOutput += "\nReporting to CTO\n\n*IT Support & Admin Leads (P="+staff.reportingToCTO.filter(person => person.status === "P").length+"/L="+staff.reportingToCTO.filter(person => (person.status === "L" && person.leaveType !== "TO")).length+"/TO="+staff.reportingToCTO.filter(person => (person.leaveType === "TO")).length+"/WFH="+staff.reportingToCTO.filter(person => person.status === "WFH").length+"/OS="+staff.reportingToCTO.filter(person => person.status === "OS").length+")\n"
       staff.reportingToCTO.forEach((person) => {
         finalOutput += person.name+" - "+((person.status === "L") ? ((person.leaveType === "") ? "Leave" : person.leaveType ) : person.status)+" "+((person.timeIn === "") ? "" : "("+person.timeIn+") ")+person.reason+"\n"
       })
