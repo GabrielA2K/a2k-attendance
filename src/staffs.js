@@ -15,14 +15,15 @@ export const staffs = {
     softwareDevelopersDesigners: [
       { name: "MC Karl Javier", status: "", timeIn: "", reason: "", leaveType: "" },
       { name: "Jose Gabriel Castillo", status: "", timeIn: "", reason: "", leaveType: "" },
-      { name: "Tristan Santos", status: "", timeIn: "", reason: "", leaveType: "" }
-    ],
-    projectLeaders: [
+      { name: "Tristan Santos", status: "", timeIn: "", reason: "", leaveType: "" },
       { name: "Franklin Sula", status: "", timeIn: "", reason: "", leaveType: "" },
       { name: "Aldrich Bondoc", status: "", timeIn: "", reason: "", leaveType: "" },
       { name: "Mark Liwanag", status: "", timeIn: "", reason: "", leaveType: "" },
       { name: "Mark Leigh David", status: "", timeIn: "", reason: "", leaveType: "" },
       { name: "Kerby Sarcia", status: "", timeIn: "", reason: "", leaveType: "" },
+    ],
+    projectLeaders: [
+      
     ],
     reportingToCTO: [
       { name: "Evelyn Layson", status: "", timeIn: "", reason: "", leaveType: "" },
@@ -38,6 +39,6 @@ export const staffs = {
     ],
     others: [],
     dataVersion: [
-      { version: "1.0.22", name: "", status: "Left", timeIn: "", reason: "", leaveType: "" }
+      { version: "1.0.23", name: "", status: "Left", timeIn: "", reason: "", leaveType: "" }
     ]
 };
