@@ -10,7 +10,6 @@ export const staffs = {
     ],
     associateDevelopers: [
       { name: "Charles Bercasio", status: "", timeIn: "", reason: "", leaveType: "" },
-      { name: "Gabriel Meridor", status: "", timeIn: "", reason: "", leaveType: "" },
     ],
     softwareDevelopersDesigners: [
       { name: "Mc Karl Kennedy Javier", status: "", timeIn: "", reason: "", leaveType: "" },
