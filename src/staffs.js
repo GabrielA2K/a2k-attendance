@@ -10,7 +10,6 @@ export const staffs = {
     ],
     associateDevelopers: [
       { name: "Charles Bercasio", status: "", timeIn: "", reason: "", leaveType: "" },
-      { name: "Iliana Castillo", status: "", timeIn: "", reason: "", leaveType: "" },
       { name: "Gabriel Meridor", status: "", timeIn: "", reason: "", leaveType: "" },
     ],
     softwareDevelopersDesigners: [
@@ -40,6 +39,6 @@ export const staffs = {
     ],
     others: [],
     dataVersion: [
-      { version: "1.0.24", name: "", status: "Left", timeIn: "", reason: "", leaveType: "" }
+      { version: "1.0.25", name: "", status: "Left", timeIn: "", reason: "", leaveType: "" }
     ]
 };
