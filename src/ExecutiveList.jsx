@@ -55,7 +55,7 @@ export default function ExecutiveList(stafflist) {
                     <div className="execListItem">
                       <div className="execListHeader">
                         <p className={"execNameDetails"}>
-                        <Icon icon={"material-symbols:circle"} height={10} width={10} className={'iconWrapper P'}/>
+                        {/* <Icon icon={"material-symbols:circle"} height={10} width={10} className={'iconWrapper P'}/> */}
                         {i.name+"\n"}<span className="execAppointment">{i.position}</span>
                         </p>
                         <Icon icon={'mingcute:minimize-fill'} height={20} className='iconBtn destructive removeExec' onClick={()=>{

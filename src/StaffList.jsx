@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react';
 import { Icon } from '@iconify/react/dist/iconify.js'
-import { saveData, staff } from './components/process/LocalStorageHandler';
+import { saveData, staff, staffData, saveStaffData } from './components/process/LocalStorageHandler';
 import TimePicker from './TimePicker';
 
 
@@ -16,7 +16,7 @@ export default function StaffList(stafflist) {
         } else {
           stafflist.list[key].status = toStatus
         }   
-        saveData(staff)
+        saveStaffData(staffData)
 
         stafflist.trigger();
         // console.log(JSON.parse(localStorage.getItem("staffData")))
@@ -27,7 +27,7 @@ export default function StaffList(stafflist) {
     
     const updateTimeIn = (key,timeIn) => {
       stafflist.list[key].timeIn = timeIn
-      saveData(staff)
+      saveStaffData(staffData)
       return
     }
     const getCurentTime = () => {
@@ -36,12 +36,12 @@ export default function StaffList(stafflist) {
     }
     const updateReason = (key,reason) => {
       stafflist.list[key].reason = reason
-      saveData(staff)
+      saveStaffData(staffData)
       return
     }
     const updateLeave = (key,leave) => {
       stafflist.list[key].leaveType = leave
-      saveData(staff)
+      saveStaffData(staffData)
       return
     }
     const statusClassCheck = (getStatus,testStatus) => {
@@ -67,7 +67,8 @@ export default function StaffList(stafflist) {
             <div key={key} className={"staffListItemContainer "}>
               
               <div className="staffListItem">
-                <p className={"nameStatus "+(status !== "" ? "active" : "")}><Icon icon={"material-symbols:circle"} height={10} width={10} className={'iconWrapper '+status}/>{i.name}</p>
+                {/* <p className={"nameStatus "+(status !== "" ? "active" : "")}><Icon icon={"material-symbols:circle"} height={10} width={10} className={'iconWrapper '+status}/>{i.name}</p> */}
+                <p className={"nameStatus "+(status !== "" ? "active" : "")}>{i.name}</p>
                 {/* {(status === "") ? <Icon icon={"mingcute:warning-line"} height={18} width={18} className={'unsetIcon '+status}/> : null} */}
                 <div className="changeStatusButtonContainer">
                 
