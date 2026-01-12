@@ -147,6 +147,25 @@ export default function App() {
   const [copiedModal, setCopiedModal] = useState(false)
   const [setupModal, setSetupModal] = useState(false)
   const [formatModal, setFormatModal] = useState(false)
+  const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
+
+
+  function initializeTheme() {
+    if (!localStorage.getItem("theme")) {
+      localStorage.setItem("theme","light")
+    }
+  }
+  initializeTheme();
+
+  function toggleTheme() {
+    if (theme === "light") {
+      setTheme("dark")
+      localStorage.setItem("theme","dark")
+    } else {
+      setTheme("light")
+      localStorage.setItem("theme","light")
+    }
+  }
 
 
 
@@ -367,7 +386,7 @@ export default function App() {
   
   return (
     <>
-      <p className='mainTitle'>DDO Attendance Helper</p>
+      <p className={'mainTitle ' + localStorage.getItem("theme")}>DDO Attendance Helper</p>
       <div className="pieChart hide" 
       style={
         {
@@ -377,9 +396,14 @@ export default function App() {
           "--os": `${totalOS / totalStaff * 100}%`
         }
       }></div>
+      {/* <div className="controlPanel">
+
+
+      </div> */}
       <div className="setupButtons">
         <button onClick={()=>{setSetupModal(true)}}>Staff List</button>
         <button onClick={()=>{setFormatModal(true)}}>Attendance Format</button>
+        <button className='theme' onClick={()=>{toggleTheme()}}><Icon icon={(theme==="light" ? "hugeicons:sun-01" : "hugeicons:moon-02")} height={20} /></button>
       </div>
       
       {staffData.onTheJobTrainees.length > 0 && <StaffList titleClass={"firstItemTitle"} title="On the Job Trainees" list={staffData.onTheJobTrainees} trigger={triggerRerender} />}

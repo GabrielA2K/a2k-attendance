@@ -24,7 +24,7 @@
 
 .modalCard {
   width: min(30rem, calc(100dvw - 2rem));
-  background-color: #ffffff;
+  background-color: var(--background);
   border-radius: 1rem;
   display: flex;
   flex-direction: column;
@@ -60,7 +60,7 @@
     flex-direction: column;
     width: 100%;
     height: 24rem;
-    background-color: #F2F6F9;
+    background-color: var(--background-secondary);
     border-radius: 0.8rem;
     overflow-y: scroll;
     padding: 1rem 1.2rem;
@@ -76,14 +76,14 @@
 
 /* ------------------ MODAL BUTTONS ------------------- */
 .modalCard .primary {
-    color: rgba(66, 132, 255, 0.897);
+    color: var(--blue);
 }
 .modalCard .destructive {
-    color: #FF3B30;
+    color: var(--red);
 }
 .modalCard .secondary,
 .modalCard button {
-    color: #484848DF;
+    color: rgb(from var(--text-secondary) r g b / 0.875);
 }
 
 .modalCard > .actionButtons {

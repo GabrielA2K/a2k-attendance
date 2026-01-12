@@ -13,7 +13,7 @@
   .execAppointment {
     font-size: 0.8rem;
     font-weight: 500;
-    color: rgb(from #FF9500 r g b / 0.8);
+    color: rgb(from var(--orange) r g b / 0.8);
   }
   
   .execListHeader {
@@ -46,9 +46,9 @@
     justify-content: space-between;
     align-items: center;
     padding: 1rem 0.5rem 1rem 1.4rem;
-    background-color: #ffffff;
+    background-color: var(--background);
     box-shadow: rgb(from #0F172A r g b / 0.05) 0px 0.1rem 0.6rem 0rem;
-    border: rgb(from #CAD5E2 r g b / 0.2) 1px solid;
+    border: var(--border-color) 1px solid;
     border-radius: 1rem;
     transition: 50ms;
     -webkit-user-select: none; /* Safari */

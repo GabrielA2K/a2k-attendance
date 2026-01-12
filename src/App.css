@@ -6,7 +6,7 @@
 
 html, body {
   /* background: #0c0c0c; */
-  background: #ffffff;
+  background: var(--background);
 }
 
 #root {
@@ -17,6 +17,7 @@ html, body {
   display: flex;
   gap: 0.8rem;
   flex-direction: column;
+  padding-block: 2rem;
 }
 p {
   white-space: pre-wrap;
@@ -29,15 +30,15 @@ p {
   font-size: 1.8rem;
   font-weight: 700;
   /* color: hsla(39, 100%, 63%, 0.918); */
-  color: rgba(66, 132, 255, 0.897);
+  color: var(--blue);
   text-align: left;
   margin-inline: 1rem;
 }
 .title {
   font-size: 1.5rem;
   font-weight: 500;
-  color: #fff;
-  color: #282828;
+  /* color: #fff; */
+  color: var(--text-primary);
   margin-bottom: 0rem;
   margin-top: 3rem;
   text-align: center;
@@ -57,7 +58,7 @@ p {
   font-size: 0.8rem;
   font-weight: 400;
   /* color: rgba(255, 255, 255, 0.3); */
-  color: rgba(0, 0, 0, 0.5);
+  color: rgb(from var(--text-primary) r g b / 0.6);
   /* margin-bottom: 0.2rem; */
   margin-top: -0.5rem;
   text-align: left;
@@ -71,9 +72,9 @@ p {
   align-items: center;
   padding: 0.8rem 0.5rem 0.8rem 1.4rem;
   /* background-color: rgba(0, 0, 0, 0.2); */
-  background-color: #ffffff;
+  background-color: var(--item-color);
   box-shadow: rgb(from #0F172A r g b / 0.05) 0px 0.1rem 0.6rem 0rem;
-  border: rgb(from #CAD5E2 r g b / 0.2) 1px solid;
+  border: var(--border-color) 1px solid;
 
   width: 32rem;
   border-radius: 1rem;
@@ -97,7 +98,7 @@ p {
   font-size: 0.8rem;
   font-weight: 500;
   /* background-color: rgba(255, 255, 255, 0.05); */
-  background-color: #F2F6F9;
+  background-color: var(--button-color);
   cursor: pointer;
   opacity: 1;
 }
@@ -133,26 +134,26 @@ p {
 }
 
 .status.P {
-  --accent-color: #34C759;
-  color: #34C759; 
+  --accent-color: var(--green);
+  color: var(--green); 
 }
 .status.WFH {
-  --accent-color: #FF8D28;
-  color: #FF8D28; 
+  --accent-color: var(--orange);
+  color: var(--orange); 
 }
 .status.L,
 .status.A {
-  --accent-color: #FF383C;
-  color: #FF383C; 
+  --accent-color: var(--red);
+  color: var(--red); 
 }
 .status.OS {
-  --accent-color: #007AFF;
-  color: #007AFF; 
+  --accent-color: var(--blue);
+  color: var(--blue); 
 }
 
 .status.active {
   background-color: var(--accent-color);
-  color: #ffffff;
+  color: var(--item-color);
   opacity: 1;
   font-weight: 600;
 }
@@ -161,7 +162,7 @@ p {
 .status:active {
   outline-color: var(--accent-color);
   background-color: var(--accent-color);
-  color: #ffffff;
+  color: var(--item-color);
   /* transition: 50ms; */
 }
 /* .status.WFH:active {
@@ -175,7 +176,7 @@ p {
   outline-color: #8cb0ff;
 } */
 
-
+/* 
 .iconWrapper {
   color: #7474741c;
 }
@@ -191,7 +192,7 @@ p {
 }
 .iconWrapper.OS {
   color: #2448aa;
-}
+} */
 
 
 /* .staffListItem:hover {
@@ -204,16 +205,16 @@ p {
 } */
 
 .nameStatus {
-  color: #484848;
+  color: var(--text-primary);
   display: flex;
   gap: 0.4rem;
   align-items: center;
   justify-content: flex-start;
-  opacity: 0.8;
+  opacity: 0.7;
 }
 .nameStatus.active {
   font-weight: 500;
-  opacity: 1;
+  opacity: 0.8;
 }
 
 input {
@@ -221,15 +222,15 @@ input {
   border-radius: 2cap;
   border: 1px solid rgba(255, 255, 255, 0.0);
   /* background-color: rgba(0, 0, 0, 0.2); */
-  background-color: #F2F6F9;
+  background-color: var(--background-secondary);
 
-  color: #484848;
+  color: var(--text-secondary);
   width: 4rem;
   text-align: center;
   height: 2.1rem;
 }
 input::placeholder {
-  color: #282828;
+  color: var(--text-primary);
   opacity: 0.5;
   /* font-style: italic; */
   font-weight: 400;
@@ -283,9 +284,9 @@ select {
   position: relative;
   border-radius: 0.5rem;
   border: 0px solid transparent;
-  background-color: #F2F6F9;
+  background-color: var(--background-secondary);
   /* color: rgba(66, 132, 255, 0.897); */
-  color: #282828;
+  color: var(--text-primary);
   /* color: #ff8ca5; */
   width: 10rem;
   height: 2.1rem;
@@ -298,12 +299,12 @@ select:focus {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #F2F6F9;
+  background-color: var(--background-secondary);
   padding-inline: 0.8rem;
 }
 option {
-  background-color: #F2F6F9;
-  color: #282828;
+  background-color: var(--background-secondary);
+  color: var(--text-primary);
   padding: 1rem;
 }
 /* option:hover {
@@ -336,10 +337,10 @@ p.title {
   right: 0;
   margin-left: auto;
   padding: 0.2rem 1rem;
-  background-color: #007AFF;
+  background-color: var(--blue);
   font-size: 0.8rem;
   font-weight: 600;
-  color: #ffffff;
+  color: var(--background);
   border-radius: 10rem;
   cursor: pointer;
   transform: translateY(-0.36rem);
@@ -381,7 +382,7 @@ p.title {
   left: 50%;
   aspect-ratio: 1 / 1;
   width: 67%;
-  background-color: #ffffff;
+  background-color: var(--background);
   border-radius: 50%;
   transform: translate(-50%, -50%);
 }
@@ -389,15 +390,15 @@ p.title {
 .staffListTextArea {
   width: 100%;
   height: 24rem;
-  background-color: #F2F6F9;
+  background-color: var(--background-secondary);
   border-radius: 0.8rem;
   padding: 1rem;
   resize: none;
   border: 1px solid rgba(0, 0, 0, 0.1);
   padding: 1rem 1.2rem;
   font-size: 0.9rem;
-  background-color: #F2F6F9;
-  color: #282828;
+  background-color: var(--background-secondary);
+  color: var(--text-primary);
 }
 .staffListTextArea:focus {
   outline: none;
@@ -415,16 +416,45 @@ p.title {
 }
 .setupButtons {
   display: flex;
-    flex-direction: row;
-    justify-content: stretch;
-    gap: 0.5rem;
-    margin-top: 1rem;
+  flex-direction: row;
+  justify-content: stretch;
+  gap: 0.5rem;
+  margin-top: 1rem;
+  font-size: 0.9rem;
 }
 .setupButtons > button {
   flex-grow: 1;
-  color: rgb(from #484848 r g b / 0.9);
+  color: rgb(from var(--text-secondary) r g b / 0.9);
 }
 
+.controlPanel {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.8rem 0.5rem 0.8rem 1.4rem;
+  /* background-color: rgba(0, 0, 0, 0.2); */
+  background-color: var(--item-color);
+  box-shadow: rgb(from #0F172A r g b / 0.05) 0px 0.1rem 0.6rem 0rem;
+  border: var(--border-color) 1px solid;
+
+  width: 32rem;
+  border-radius: 1rem;
+  transition: 50ms;
+  -webkit-user-select: none;
+  /* Safari */
+  -ms-user-select: none;
+  /* IE 10 and IE 11 */
+  user-select: none;
+  /* Standard syntax */
+  transition: 300ms;
+  margin-bottom: -0.2rem;
+  padding-block: 1rem;
+}
+button.theme {
+  flex-grow: 0;
+  padding-inline: 1rem;
+}
 
 @media only screen and (max-width: 600px) {
   .staffListItem {
@@ -433,6 +463,13 @@ p.title {
     gap: 0.5rem;
     width: calc(100dvw - 2rem);
   }
+
+    .controlPanel {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.5rem;
+      width: calc(100dvw - 2rem);
+    }
 
   /* .staffListItem:hover {
     background-color: rgba(255, 255, 255, 0.02);
