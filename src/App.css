@@ -213,7 +213,7 @@ p {
   opacity: 0.7;
 }
 .nameStatus.active {
-  font-weight: 500;
+  /* font-weight: 500; */
   opacity: 0.8;
 }
 
@@ -422,8 +422,10 @@ p.title {
   margin-top: 1rem;
   font-size: 0.9rem;
 }
-.setupButtons > button {
+.setupButtons > button,
+button.spillButton {
   flex-grow: 1;
+  font-size: 0.9rem;
   color: rgb(from var(--text-secondary) r g b / 0.9);
 }
 

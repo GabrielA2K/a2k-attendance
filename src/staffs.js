@@ -123,3 +123,55 @@ Kerby Sarcia
 Evelyn Layson
 Alonzo Luis Pamintuan
 `;
+
+export const sampleString = `
+PM Attendance, 13 January/1341hrs
+
+On the Job Trainees (P=0/A=0/WFH=0/OS=0)
+
+
+Assistant Developers/Designers (P=0/A=0/TO=0/WFH=0/OS=0)
+
+
+Associate Developers/Designers (P=0/A=0/TO=0/WFH=0/OS=0)
+
+
+Software Developers/Designers (P=3/L=0/TO=0/WFH=5/OS=0)
+Mc Karl Kennedy Javier - P (08:13) 
+Jose Gabriel Castillo - P (08:25) 
+Tristan Santos - WFH 
+Franklin Sula - WFH 
+Aldrich Bondoc - WFH 
+Mark Liwanag - WFH 
+Mark Leigh David - P (08:10) 
+Kerby Sarcia - WFH  
+
+Project Leaders (P=0/L=0/TO=0/WFH=0/OS=0)
+
+Reporting to CTO
+
+*IT Support & Admin Leads (P=1/L=0/TO=0/WFH=1/OS=0)
+Evelyn Layson - P (08:00) 
+Alonzo Luis Pamintuan - WFH
+
+*Reporting to Executives
+
+Expert Developers/Engineers
+N/A
+
+Executive Board Members
+Jasdeep Sandhu (Chairman) - P (13:40)
+Mark Nuqui (COO) - P (13:16)
+Ma. Ronna Silos (CFO) - P (13:40)
+
+Guests/Others
+Guest 1 (13:22) - Visitation
+Someone New (13:40) - Visiting and Partnership
+
+Overall Leave: 0
+Overall Absent: 0
+Overall OS: 0
+Overall TO: 0
+Overall WFH: 6
+Overall Office: 9
+`;

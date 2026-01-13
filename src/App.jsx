@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react'
-import { staffs, staffString, attendanceFormat } from './staffs'
+import { staffs, staffString, attendanceFormat, sampleString } from './staffs'
 import StaffList from './StaffList'
 import ExecutiveList from './ExecutiveList'
 import FlexibleList from './FlexibleList'
 import { Icon } from '@iconify/react/dist/iconify.js'
-import { loadData, staff, updateStaff, loadStaffData, updateStaffData, staffData } from './components/process/LocalStorageHandler'
+import { loadData, staff, updateStaff, loadStaffData, updateStaffData, staffData, saveStaffData, saveData } from './components/process/LocalStorageHandler'
 // import TimePicker from './TimePicker'
 import './App.css'
 import './components/styles/Modal.css'
@@ -147,6 +147,7 @@ export default function App() {
   const [copiedModal, setCopiedModal] = useState(false)
   const [setupModal, setSetupModal] = useState(false)
   const [formatModal, setFormatModal] = useState(false)
+  const [fillModal, setFillModal] = useState(false)
   const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
 
 
@@ -168,6 +169,144 @@ export default function App() {
   }
 
 
+  function fillAttendance(attendanceText, staff) {
+  const leaveKeywords = [
+    "Leave",
+    "Sick Leave",
+    "Family Care Leave",
+    "Medical Care Leave",
+    "Maternity Leave",
+    "OIL",
+    "TO"
+  ];
+
+  function parseLine(line) {
+    const parts = line.split(" - ");
+    if (parts.length < 2) return null;
+
+    const name = parts[0].trim();
+    let rest = parts[1].trim();
+
+    let timeIn = "";
+    let reason = "";
+
+    // Extract time if exists (08:47)
+    const timeMatch = rest.match(/\((.*?)\)/);
+    if (timeMatch) {
+      timeIn = timeMatch[1].trim();
+      // Remove the (time)
+      rest = rest.replace(timeMatch[0], "").trim();
+    }
+
+    // Anything after parenthesis is reason
+    if (rest.includes(")")) {
+      const reasonPart = rest.split(")")[1];
+      if (reasonPart) reason = reasonPart.trim();
+    }
+
+    let statusText = rest.trim();
+
+    let status = "";
+    let leaveType = "";
+
+    if (["P", "WFH", "OS"].includes(statusText)) {
+      status = statusText;
+    } else {
+      // Check if this matches any leave type keywords
+      const matchedLeave = leaveKeywords.find(k => statusText.includes(k));
+      if (matchedLeave) {
+        status = "L";
+        leaveType = statusText;
+      }
+    }
+
+    return { name, status, timeIn, reason, leaveType };
+  }
+
+  function applyToGroup(groupArray) {
+    groupArray.forEach(person => {
+      const regex = new RegExp(`${person.name}\\s*-.*`, "im");
+      const match = attendanceText.match(regex);
+      if (!match) return;
+
+      const parsed = parseLine(match[0]);
+      if (!parsed) return;
+
+      person.status = parsed.status || "";
+      person.timeIn = parsed.timeIn || "";
+      person.reason = parsed.reason || "";
+      person.leaveType = parsed.leaveType || "";
+    });
+  }
+
+  applyToGroup(staff.onTheJobTrainees);
+  applyToGroup(staff.assistantDevelopers);
+  applyToGroup(staff.associateDevelopers);
+  applyToGroup(staff.projectLeaders);
+  applyToGroup(staff.reportingToCTO);
+  applyToGroup(staff.softwareDevelopersDesigners);
+
+  return staff;
+}
+
+function fillExecAndGuests(attendanceText, staff) {
+  // --- EXECUTIVES ---
+  staff.executives.forEach(exec => {
+    const regex = new RegExp(`${exec.name}.*`, "i");
+    const match = attendanceText.match(regex);
+
+    if (!match) return; // stays Left
+
+    const line = match[0];
+
+    // Extract time (13:16)
+    const timeMatch = line.match(/\((\d{2}:\d{2})\)/);
+    exec.status = "P";
+    exec.timeIn = timeMatch ? timeMatch[1] : "";
+    exec.reason = "";
+  });
+
+  // --- GUESTS ---
+  const guestSection = attendanceText.match(/Guests\/Others([\s\S]*?)Overall/i);
+
+  if (!guestSection) return staff;
+
+  const guestLines = guestSection[1]
+    .split("\n")
+    .map(l => l.trim())
+    .filter(l => l && !l.startsWith("N/A"));
+
+  guestLines.forEach(line => {
+    // Expected format: Guest 1 (13:22) - Visitation
+    const guestRegex = /^(.+?)\s*\((\d{2}:\d{2})\)\s*-\s*(.+)$/i;
+    const match = line.match(guestRegex);
+    if (!match) return;
+
+    const name = match[1].trim();
+    const timeIn = match[2].trim();
+    const reason = match[3].trim();
+
+    const existing = staff.others.find(g => g.name === name);
+
+    if (existing) {
+      existing.status = "P";
+      existing.timeIn = timeIn;
+      existing.reason = reason;
+    } else {
+      staff.others.push({
+        name,
+        status: "P",
+        timeIn,
+        reason,
+        leaveType: ""
+      });
+    }
+  });
+
+  return staff;
+}
+
+
 
   function copyToClipboard(value) {
     const textarea = document.createElement("textarea");
@@ -177,6 +316,7 @@ export default function App() {
   
     document.body.appendChild(textarea);
     textarea.select();
+    console.log(localStorage.getItem("staffData"))
     try {
       document.execCommand("copy"); // Fallback copy command
       setCopiedModal(true)
@@ -343,7 +483,7 @@ export default function App() {
         P_Count: Office_Count
       });
             
-      console.log(finalOutput)
+      // console.log(finalOutput)
       return finalOutput
   }
 
@@ -374,11 +514,11 @@ export default function App() {
     setTotalWFH(countOverallStaff(staff,"WFH"))
     setTotalOS(countOverallStaff(staff,"OS"))
     setTotalStaff(countOverallStaff(staff,"P") + countOverallStaff(staff,"L") + countOverallStaff(staff,"A") + countOverallStaff(staff,"WFH") + countOverallStaff(staff,"OS") + countOverallStaff(staff,""))
-    console.log("Total Present: ", Math.round(totalPresent / totalStaff * 100))
-    console.log("Total Leave: ", Math.round(totalLeave / totalStaff * 100))
-    console.log("Total WFH: ", Math.round(totalWFH / totalStaff * 100))
-    console.log("Total OS: ", Math.round(totalOS / totalStaff * 100))
-    console.log("Total Staff: ", totalStaff)
+    // console.log("Total Present: ", Math.round(totalPresent / totalStaff * 100))
+    // console.log("Total Leave: ", Math.round(totalLeave / totalStaff * 100))
+    // console.log("Total WFH: ", Math.round(totalWFH / totalStaff * 100))
+    // console.log("Total OS: ", Math.round(totalOS / totalStaff * 100))
+    // console.log("Total Staff: ", totalStaff)
   });
 
 
@@ -386,7 +526,7 @@ export default function App() {
   
   return (
     <>
-      <p className={'mainTitle ' + localStorage.getItem("theme")}>DDO Attendance Helper</p>
+      <p className={'mainTitle ' + theme}>DDO Attendance Helper</p>
       <div className="pieChart hide" 
       style={
         {
@@ -405,6 +545,7 @@ export default function App() {
         <button onClick={()=>{setFormatModal(true)}}>Attendance Format</button>
         <button className='theme' onClick={()=>{toggleTheme()}}><Icon icon={(theme==="light" ? "hugeicons:sun-01" : "hugeicons:moon-02")} height={20} /></button>
       </div>
+      <button className='spillButton' onClick={()=>{setFillModal(true)}}>Fill from Text</button>
       
       {staffData.onTheJobTrainees.length > 0 && <StaffList titleClass={"firstItemTitle"} title="On the Job Trainees" list={staffData.onTheJobTrainees} trigger={triggerRerender} />}
       {staffData.assistantDevelopers.length > 0 && <StaffList title="Assistant Developers and Designers" list={staffData.assistantDevelopers} trigger={triggerRerender} />}
@@ -462,6 +603,23 @@ export default function App() {
               <button className='' onClick={()=>{document.querySelector('.staffListTextArea').value = attendanceFormat}}>Fetch Latest (Reset)</button>
               <button className='primary' onClick={()=>{localStorage.setItem("attendanceFormatData", document.querySelector('.staffListTextArea').value); setFormatModal(false);}}>Apply</button>
               <button className='destructive' onClick={()=>{setFormatModal(false)}}>Cancel</button>
+            </div>
+            
+
+          </div>
+        </div>
+        : null
+      }
+
+      {
+        fillModal ?
+        <div className={"modalOverlay "+(fillModal ? "active" : "inactive")}>
+          <div className="modalCard">
+            <p className="title"><Icon icon={"hugeicons:document-validation"} className='copyIcon' />  Fill from Text</p>
+            <textarea className='staffListTextArea' name="" id="" placeholder='Paste existing attendance here...'></textarea>
+            <div className="setupActions">
+              <button className='primary' onClick={()=>{fillAttendance(document.querySelector('.staffListTextArea').value, staffData); fillExecAndGuests(document.querySelector('.staffListTextArea').value, staff); saveStaffData(staffData); saveData(staff); setFillModal(false); window.location.reload();}}>Apply</button>
+              <button className='destructive' onClick={()=>{setFillModal(false)}}>Cancel</button>
             </div>
             
 

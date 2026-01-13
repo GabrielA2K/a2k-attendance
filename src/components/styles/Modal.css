@@ -66,6 +66,7 @@
     padding: 1rem 1.2rem;
     font-size: 0.9rem;
     gap: 0.5rem;
+    color: var(--text-primary);
 }
 .modalCard > .modalBody {
     display: flex;
