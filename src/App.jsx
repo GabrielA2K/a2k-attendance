@@ -1,56 +1,17 @@
 import React, { useEffect, useState } from 'react'
-import { staffs, staffString, attendanceFormat, sampleString } from './staffs'
+import { staffs, staffString, attendanceFormat } from './staffs'
 import StaffList from './StaffList'
 import ExecutiveList from './ExecutiveList'
 import FlexibleList from './FlexibleList'
 import { Icon } from '@iconify/react/dist/iconify.js'
-import { loadData, staff, updateStaff, loadStaffData, updateStaffData, staffData, saveStaffData, saveData } from './components/process/LocalStorageHandler'
+import { loadData, staff, updateStaff, loadStaffData, updateStaffData, staffData } from './components/process/LocalStorageHandler'
+import { convertToRoleObject } from './components/process/ObjectModifier'
+import { mergeAttendance } from './components/process/AttendanceModifier'
 // import TimePicker from './TimePicker'
 import './App.css'
 import './components/styles/Modal.css'
 
 
-function convertToRoleObject(input) {
-  const result = {
-    onTheJobTrainees: [],
-    assistantDevelopers: [],
-    associateDevelopers: [],
-    softwareDevelopersDesigners: [],
-    projectLeaders: [],
-    reportingToCTO: []
-  };
-
-  const regex = /\[(.+?)\]\s*([\s\S]*?)(?=\n?\[|$)/g;
-  let match;
-
-  while ((match = regex.exec(input)) !== null) {
-    const role = match[1].trim();
-    const block = match[2];
-
-    const members = block
-      .split('\n')
-      .map(line => line.trim())
-      .filter(line => line && line !== "*EOL*")
-      .map(name => ({ name, status: "", timeIn: "", reason: "", leaveType: "" }));
-
-    // Hard-coded role assignment (NO dynamic naming)
-    if (role === "SoftwareDevelopersDesigners") {
-      result.softwareDevelopersDesigners = members;
-    } else if (role === "ReportingToCTO") {
-      result.reportingToCTO = members;
-    } else if (role === "AssociateDevelopers") {
-      result.associateDevelopers = members;
-    } else if (role === "OnTheJobTrainees") {
-      result.onTheJobTrainees = members;
-    } else if (role === "ProjectLeaders") {
-      result.projectLeaders = members;
-    } else if (role === "AssistantDevelopers") {
-      result.assistantDevelopers = members;
-    }
-  }
-
-  return result;
-}
 
 // console.log(convertToRoleObject(staffString));
 
@@ -169,142 +130,7 @@ export default function App() {
   }
 
 
-  function fillAttendance(attendanceText, staff) {
-  const leaveKeywords = [
-    "Leave",
-    "Sick Leave",
-    "Family Care Leave",
-    "Medical Care Leave",
-    "Maternity Leave",
-    "OIL",
-    "TO"
-  ];
-
-  function parseLine(line) {
-    const parts = line.split(" - ");
-    if (parts.length < 2) return null;
-
-    const name = parts[0].trim();
-    let rest = parts[1].trim();
-
-    let timeIn = "";
-    let reason = "";
-
-    // Extract time if exists (08:47)
-    const timeMatch = rest.match(/\((.*?)\)/);
-    if (timeMatch) {
-      timeIn = timeMatch[1].trim();
-      // Remove the (time)
-      rest = rest.replace(timeMatch[0], "").trim();
-    }
-
-    // Anything after parenthesis is reason
-    if (rest.includes(")")) {
-      const reasonPart = rest.split(")")[1];
-      if (reasonPart) reason = reasonPart.trim();
-    }
-
-    let statusText = rest.trim();
-
-    let status = "";
-    let leaveType = "";
-
-    if (["P", "WFH", "OS"].includes(statusText)) {
-      status = statusText;
-    } else {
-      // Check if this matches any leave type keywords
-      const matchedLeave = leaveKeywords.find(k => statusText.includes(k));
-      if (matchedLeave) {
-        status = "L";
-        leaveType = statusText;
-      }
-    }
-
-    return { name, status, timeIn, reason, leaveType };
-  }
-
-  function applyToGroup(groupArray) {
-    groupArray.forEach(person => {
-      const regex = new RegExp(`${person.name}\\s*-.*`, "im");
-      const match = attendanceText.match(regex);
-      if (!match) return;
-
-      const parsed = parseLine(match[0]);
-      if (!parsed) return;
-
-      person.status = parsed.status || "";
-      person.timeIn = parsed.timeIn || "";
-      person.reason = parsed.reason || "";
-      person.leaveType = parsed.leaveType || "";
-    });
-  }
-
-  applyToGroup(staff.onTheJobTrainees);
-  applyToGroup(staff.assistantDevelopers);
-  applyToGroup(staff.associateDevelopers);
-  applyToGroup(staff.projectLeaders);
-  applyToGroup(staff.reportingToCTO);
-  applyToGroup(staff.softwareDevelopersDesigners);
-
-  return staff;
-}
-
-function fillExecAndGuests(attendanceText, staff) {
-  // --- EXECUTIVES ---
-  staff.executives.forEach(exec => {
-    const regex = new RegExp(`${exec.name}.*`, "i");
-    const match = attendanceText.match(regex);
-
-    if (!match) return; // stays Left
-
-    const line = match[0];
-
-    // Extract time (13:16)
-    const timeMatch = line.match(/\((\d{2}:\d{2})\)/);
-    exec.status = "P";
-    exec.timeIn = timeMatch ? timeMatch[1] : "";
-    exec.reason = "";
-  });
-
-  // --- GUESTS ---
-  const guestSection = attendanceText.match(/Guests\/Others([\s\S]*?)Overall/i);
-
-  if (!guestSection) return staff;
-
-  const guestLines = guestSection[1]
-    .split("\n")
-    .map(l => l.trim())
-    .filter(l => l && !l.startsWith("N/A"));
-
-  guestLines.forEach(line => {
-    // Expected format: Guest 1 (13:22) - Visitation
-    const guestRegex = /^(.+?)\s*\((\d{2}:\d{2})\)\s*-\s*(.+)$/i;
-    const match = line.match(guestRegex);
-    if (!match) return;
-
-    const name = match[1].trim();
-    const timeIn = match[2].trim();
-    const reason = match[3].trim();
-
-    const existing = staff.others.find(g => g.name === name);
-
-    if (existing) {
-      existing.status = "P";
-      existing.timeIn = timeIn;
-      existing.reason = reason;
-    } else {
-      staff.others.push({
-        name,
-        status: "P",
-        timeIn,
-        reason,
-        leaveType: ""
-      });
-    }
-  });
-
-  return staff;
-}
+  
 
 
 
@@ -506,6 +332,7 @@ function fillExecAndGuests(attendanceText, staff) {
   const [dummy, setDummy] = useState(0)
   const triggerRerender = () => {
     setDummy((prev) => prev + 1);
+    dummy%2 === 0 ? setDummy(1) : setDummy(0);
   }
 
   useEffect(() => {
@@ -514,15 +341,8 @@ function fillExecAndGuests(attendanceText, staff) {
     setTotalWFH(countOverallStaff(staff,"WFH"))
     setTotalOS(countOverallStaff(staff,"OS"))
     setTotalStaff(countOverallStaff(staff,"P") + countOverallStaff(staff,"L") + countOverallStaff(staff,"A") + countOverallStaff(staff,"WFH") + countOverallStaff(staff,"OS") + countOverallStaff(staff,""))
-    // console.log("Total Present: ", Math.round(totalPresent / totalStaff * 100))
-    // console.log("Total Leave: ", Math.round(totalLeave / totalStaff * 100))
-    // console.log("Total WFH: ", Math.round(totalWFH / totalStaff * 100))
-    // console.log("Total OS: ", Math.round(totalOS / totalStaff * 100))
-    // console.log("Total Staff: ", totalStaff)
   });
 
-
-  
   
   return (
     <>
@@ -536,10 +356,7 @@ function fillExecAndGuests(attendanceText, staff) {
           "--os": `${totalOS / totalStaff * 100}%`
         }
       }></div>
-      {/* <div className="controlPanel">
-
-
-      </div> */}
+      
       <div className="setupButtons">
         <button onClick={()=>{setSetupModal(true)}}>Staff List</button>
         <button onClick={()=>{setFormatModal(true)}}>Attendance Format</button>
@@ -618,7 +435,7 @@ function fillExecAndGuests(attendanceText, staff) {
             <p className="title"><Icon icon={"hugeicons:document-validation"} className='copyIcon' />  Fill from Text</p>
             <textarea className='staffListTextArea' name="" id="" placeholder='Paste existing attendance here...'></textarea>
             <div className="setupActions">
-              <button className='primary' onClick={()=>{fillAttendance(document.querySelector('.staffListTextArea').value, staffData); fillExecAndGuests(document.querySelector('.staffListTextArea').value, staff); saveStaffData(staffData); saveData(staff); setFillModal(false); window.location.reload();}}>Apply</button>
+              <button className='primary' onClick={()=>{mergeAttendance(document.querySelector('.staffListTextArea').value); setFillModal(false); window.location.reload();}}>Apply</button>
               <button className='destructive' onClick={()=>{setFillModal(false)}}>Cancel</button>
             </div>
             
