@@ -44,7 +44,7 @@ function fillAttendance(attendanceText, staff) {
       status = statusText;
     } else {
       const matchedLeave = leaveKeywords.find((k) =>
-        rest.toLowerCase().includes(k.toLowerCase())
+        rest.toLowerCase().includes(k.toLowerCase()),
       );
       if (matchedLeave) {
         status = "L";
@@ -85,15 +85,13 @@ function fillAttendance(attendanceText, staff) {
 function fillExecAndGuests(attendanceText, staff) {
   // --- EXECUTIVES ---
   staff.executives.forEach((exec) => {
-    const regex = new RegExp(`${exec.name}.*`, "i");
+    const regex = new RegExp(`^${exec.name}.*$`, "im");
     const match = attendanceText.match(regex);
-
-    if (!match) return; // stays Left
+    if (!match) return;
 
     const line = match[0];
-
-    // Extract time (13:16)
     const timeMatch = line.match(/\((\d{2}:\d{2})\)/);
+
     exec.status = "P";
     exec.timeIn = timeMatch ? timeMatch[1] : "";
     exec.reason = "";
@@ -101,7 +99,6 @@ function fillExecAndGuests(attendanceText, staff) {
 
   // --- GUESTS ---
   const guestSection = attendanceText.match(/Guests\/Others([\s\S]*?)Overall/i);
-
   if (!guestSection) return staff;
 
   const guestLines = guestSection[1]
@@ -110,14 +107,15 @@ function fillExecAndGuests(attendanceText, staff) {
     .filter((l) => l && !l.startsWith("N/A"));
 
   guestLines.forEach((line) => {
-    // Expected format: Guest 1 (13:22) - Visitation
-    const guestRegex = /^(.+?)\s*\((\d{2}:\d{2})\)\s*-\s*(.+)$/i;
-    const match = line.match(guestRegex);
-    if (!match) return;
+    // Supports:
+    // Name (13:32) - Reason
+    // Name (13:32)
+    const m = line.match(/^(.+?)\s*\((\d{2}:\d{2})\)(?:\s*-\s*(.*))?$/);
+    if (!m) return;
 
-    const name = match[1].trim();
-    const timeIn = match[2].trim();
-    const reason = match[3].trim();
+    const name = m[1].trim();
+    const timeIn = m[2].trim();
+    const reason = m[3]?.trim() || "";
 
     const existing = staff.others.find((g) => g.name === name);
 
