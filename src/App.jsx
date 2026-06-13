@@ -347,6 +347,7 @@ export default function App() {
   return (
     <>
       <p className={'mainTitle ' + theme}>DDO Attendance Helper</p>
+      <p className="details">Attendance helper for managing staff attendance</p>
       <div className="pieChart hide" 
       style={
         {
@@ -358,11 +359,11 @@ export default function App() {
       }></div>
       
       <div className="setupButtons">
-        <button className={(localStorage.getItem("staffStringData") == staffString ? "" : "staff-attention attention")} onClick={()=>{setFormatModal(true)}} onClick={()=>{setSetupModal(true)}}>Staff List</button>
-        <button className={(localStorage.getItem("attendanceFormatData") == attendanceFormat ? "" : "format-attention attention")} onClick={()=>{setFormatModal(true)}}>Attendance Format</button>
+        <button className={(localStorage.getItem("staffStringData") == staffString ? "staff-updated updated" : "staff-attention attention")} onClick={()=>{setFormatModal(true)}} onClick={()=>{setSetupModal(true)}}>Staff List</button>
+        <button className={(localStorage.getItem("attendanceFormatData") == attendanceFormat ? "format-updated updated" : "format-attention attention")} onClick={()=>{setFormatModal(true)}}>Attendance Format</button>
         <button className='theme' onClick={()=>{toggleTheme()}}><Icon icon={(theme==="light" ? "hugeicons:sun-01" : "hugeicons:moon-02")} height={20} /></button>
       </div>
-      <button className='spillButton' onClick={()=>{setFillModal(true)}}>Fill from Text</button>
+      <button className='spillButton' onClick={()=>{setFillModal(true)}}>Fill from Existing Attendance Text</button>
       
       {staffData.onTheJobTrainees.length > 0 && <StaffList titleClass={"firstItemTitle"} title="On the Job Trainees" list={staffData.onTheJobTrainees} trigger={triggerRerender} />}
       {staffData.assistantDevelopers.length > 0 && <StaffList title="Assistant Developers & Designers" list={staffData.assistantDevelopers} trigger={triggerRerender} />}
@@ -439,7 +440,7 @@ export default function App() {
         <div className={"modalOverlay "+(fillModal ? "active" : "inactive")}>
           <div className="modalCard">
             <p className="title"><Icon icon={"hugeicons:document-validation"} className='copyIcon' />  Fill from Text</p>
-            <textarea className='staffListTextArea' name="" id="" placeholder='Paste existing attendance here...'></textarea>
+            <textarea className='staffListTextArea fillExisting' name="" id="" placeholder='Paste existing attendance here...'></textarea>
             <div className="mainButtons">
               <button className='primary' onClick={()=>{mergeAttendance(document.querySelector('.staffListTextArea').value); setFillModal(false); window.location.reload();}}>Apply</button>
               <button className='destructive' onClick={()=>{setFillModal(false)}}>Cancel</button>

@@ -33,6 +33,8 @@ p {
   color: var(--blue);
   text-align: left;
   margin-inline: 1rem;
+  margin-bottom: -0.5rem;
+  margin-top: -1rem;
 }
 .title {
   font-size: 1.5rem;
@@ -403,6 +405,12 @@ p.title {
 .staffListTextArea:focus {
   outline: none;
 }
+.staffListTextArea.fillExisting::placeholder {
+  color: var(--text-primary);
+  opacity: 0.3;
+  font-style: italic;
+}
+
 .setupActions {
   display: flex;
   flex-direction: column;
@@ -461,14 +469,22 @@ button.theme {
 button.attention {
   border: 1px dashed var(--orange);
   /* color: var(--red); */
+  padding-bottom: 1.8rem;
+  position: relative;
+}
+
+button.updated {
+  /* border: 1px solid var(--green); */
+  /* color: var(--red); */
+  padding-bottom: 1.8rem;
   position: relative;
 }
 
 button.format-attention::after {
   color: var(--orange);
   position: absolute;
-  top: -1.1rem;
-  font-size: 0.7rem;
+  top: 2rem;
+  font-size: 0.6rem;
   font-style: italic;
   content: 'Using custom/outdated format';
   font-weight: 400;
@@ -476,12 +492,33 @@ button.format-attention::after {
 button.staff-attention::after {
   color: var(--orange);
   position: absolute;
-  top: -1.1rem;
-  font-size: 0.7rem;
+  top: 2rem;
+  font-size: 0.6rem;
   font-style: italic;
   content: 'Custom/Outdated';
   font-weight: 400;
 }
+
+button.format-updated::after {
+  color: var(--green);
+  position: absolute;
+  top: 2rem;
+  font-size: 0.6rem;
+  font-style: italic;
+  content: 'Up-to-date';
+  font-weight: 400;
+}
+button.staff-updated::after {
+  color: var(--green);
+  position: absolute;
+  top: 2rem;
+  font-size: 0.6rem;
+  font-style: italic;
+  content: 'Up-to-date';
+  font-weight: 400;
+}
+
+
 p.tinyhint {
   font-size: 0.7rem;
   font-style: italic;
