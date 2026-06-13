@@ -90,11 +90,25 @@ function fillExecAndGuests(attendanceText, staff) {
     if (!match) return;
 
     const line = match[0];
-    const timeMatch = line.match(/\((\d{2}:\d{2})\)/);
 
-    exec.status = "P";
-    exec.timeIn = timeMatch ? timeMatch[1] : "";
-    exec.reason = "";
+    // Get status (P or OS)
+    const statusMatch = line.match(/-\s*(P|OS)\b/);
+    const status = statusMatch ? statusMatch[1] : "P";
+
+    // Get time
+    const timeMatch = line.match(/\((\d{2}:\d{2})\)/);
+    const timeIn = timeMatch ? timeMatch[1] : "";
+
+    // Get reason after the time (for OS)
+    let reason = "";
+    const reasonMatch = line.match(/\(\d{2}:\d{2}\)\s*(.*)$/);
+    if (reasonMatch) {
+      reason = reasonMatch[1].trim();
+    }
+
+    exec.status = status;
+    exec.timeIn = timeIn;
+    exec.reason = reason;
   });
 
   // --- GUESTS ---

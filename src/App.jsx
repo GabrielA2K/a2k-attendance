@@ -209,7 +209,7 @@ export default function App() {
 
       const L_Count = countOverallStaffOnLeave(staffData);
       const A_Count = countOverallStaff(staffData,"A");
-      const OS_Count = countOverallStaff(staffData,"OS");
+      const OS_Count = countOverallStaff(staffData,"OS") + countOverallStaff(staff,"OS");
       const TO_Count = countOverallStaffOnTO(staffData);
       const WFH_Count = countOverallStaff(staffData,"WFH");
       const Office_Count = countOverallStaff(staff,"P") + countOverallStaff(staffData,"P");
@@ -240,9 +240,9 @@ export default function App() {
   
       let execCounter = 0;
       staff.executives
-      .filter(person => person.status === "P") // Filter only those with status "P"
+      .filter(person => person.status === "P" || person.status === "OS") // Filter only those with status "P" or "OS"
       .forEach(person => { 
-        Exec_LIST += person.name + " (" + person.position + ") - P " + ((person.timeIn === "") ? "" : "(" + person.timeIn + ")") + "\n";
+        Exec_LIST += person.name + ( person.position !== "" ? " (" + person.position + ")" : "" ) + " - " + person.status + " " + ((person.timeIn === "") ? "" : "(" + person.timeIn + ")") + "\n";
         execCounter++;
       });
       if (execCounter === 0) {

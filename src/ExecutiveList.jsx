@@ -7,8 +7,16 @@ import './ExecutiveList.css'
 
 export default function ExecutiveList(stafflist) {
     
+    const toggleStatus = (key,currentStatus,toStatus) => {
+      stafflist.list[key].status = toStatus
+      saveData(staff)
+      stafflist.trigger();
+      // console.log(JSON.parse(localStorage.getItem("staffData")))
+      // console.log(i)
+    }
+
     const toggle = (key) => {
-      if (stafflist.list[key].status === "P") {
+      if (stafflist.list[key].status === "P" || stafflist.list[key].status === "OS") {
         stafflist.list[key].status = "Left"
       } else {
         stafflist.list[key].status = "P"
@@ -40,7 +48,7 @@ export default function ExecutiveList(stafflist) {
               setModalOverlay(true)
             }}>+ Add </span>
             </p>
-            <p className="details">{"P = "+stafflist.list.filter(person => person.status === "P").length}</p>
+            <p className="details">{"P = "+stafflist.list.filter(person => person.status === "P").length + " / OS = "+stafflist.list.filter(person => person.status === "OS").length}</p>
             
             {stafflist.list.map((i, key)=>{
               const [status, setStatus] = useState(i.status)
@@ -48,7 +56,7 @@ export default function ExecutiveList(stafflist) {
               const timeInput = useRef(null)
               
               
-              if (i.status === "P") {
+              if (i.status === "P" || i.status === "OS") {
                 return (
                   <div key={key} className={"executives "}>
                     
@@ -66,7 +74,15 @@ export default function ExecutiveList(stafflist) {
                         
                       </div>
                       <div className="timeSelectContainer">
-                      <p className="status P active exec" >Present</p>
+                      <p className={i.status === "P" ? "status P active exec" : "status OS active exec"} onClick={()=>{
+                        if (i.status === "P") {
+                            toggleStatus(key,i.status,"OS")
+                        } else if (i.status === "OS") {
+                            toggleStatus(key,i.status,"P")
+                        }
+                        setStatus(i.status)
+                        console.log(i.status)
+                      }} >{i.status === "P" ? "Present" : i.status}</p>
                       <input ref={timeInput} type="text" defaultValue={(i.timeIn === "") ? "" : i.timeIn} placeholder="HH:MM" className={'inputHH '} onChange={(e)=>{
                           updateTimeIn(key,e.target.value)
                         }} onFocus={(e)=>{
