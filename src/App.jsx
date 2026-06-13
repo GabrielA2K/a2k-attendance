@@ -358,18 +358,18 @@ export default function App() {
       }></div>
       
       <div className="setupButtons">
-        <button onClick={()=>{setSetupModal(true)}}>Staff List</button>
-        <button onClick={()=>{setFormatModal(true)}}>Attendance Format</button>
+        <button className={(localStorage.getItem("staffStringData") == staffString ? "" : "staff-attention attention")} onClick={()=>{setFormatModal(true)}} onClick={()=>{setSetupModal(true)}}>Staff List</button>
+        <button className={(localStorage.getItem("attendanceFormatData") == attendanceFormat ? "" : "format-attention attention")} onClick={()=>{setFormatModal(true)}}>Attendance Format</button>
         <button className='theme' onClick={()=>{toggleTheme()}}><Icon icon={(theme==="light" ? "hugeicons:sun-01" : "hugeicons:moon-02")} height={20} /></button>
       </div>
       <button className='spillButton' onClick={()=>{setFillModal(true)}}>Fill from Text</button>
       
       {staffData.onTheJobTrainees.length > 0 && <StaffList titleClass={"firstItemTitle"} title="On the Job Trainees" list={staffData.onTheJobTrainees} trigger={triggerRerender} />}
-      {staffData.assistantDevelopers.length > 0 && <StaffList title="Assistant Developers and Designers" list={staffData.assistantDevelopers} trigger={triggerRerender} />}
-      {staffData.associateDevelopers.length > 0 && <StaffList title="Associate Developers and Designers" list={staffData.associateDevelopers} trigger={triggerRerender} />}
-      {staffData.softwareDevelopersDesigners.length > 0 && <StaffList title="Software Developers and Designers" list={staffData.softwareDevelopersDesigners} trigger={triggerRerender} />}
+      {staffData.assistantDevelopers.length > 0 && <StaffList title="Assistant Developers & Designers" list={staffData.assistantDevelopers} trigger={triggerRerender} />}
+      {staffData.associateDevelopers.length > 0 && <StaffList title="Associate Developers & Designers" list={staffData.associateDevelopers} trigger={triggerRerender} />}
+      {staffData.softwareDevelopersDesigners.length > 0 && <StaffList title="QAs, Software Developers, & Designers" list={staffData.softwareDevelopersDesigners} trigger={triggerRerender} />}
       {/* <StaffList title="Project Leaders" list={staffData.projectLeaders} trigger={triggerRerender} /> */}
-      {staffData.reportingToCTO.length > 0 && <StaffList title="Reporting to CTO" list={staffData.reportingToCTO} trigger={triggerRerender} />}
+      {staffData.reportingToCTO.length > 0 && <StaffList title="DSO & HR Managers" list={staffData.reportingToCTO} trigger={triggerRerender} />}
       <ExecutiveList title="Board Members" list={staff.executives} trigger={triggerRerender} />
       <FlexibleList title="Guests/Others" list={staff.others} trigger={triggerRerender} />
       
@@ -397,11 +397,14 @@ export default function App() {
         <div className={"modalOverlay "+(setupModal ? "active" : "inactive")}>
           <div className="modalCard">
             <p className="title"><Icon icon={"hugeicons:account-setting-02"} className='copyIcon' />  Manage Staff List</p>
+            <p className="tinyhint">To use latest, click "Fetch Latest" then "Apply"</p>
             <textarea className='staffListTextArea' name="" id="" defaultValue={localStorage.getItem("staffStringData")}></textarea>
             <div className="setupActions">
               <button className='' onClick={()=>{document.querySelector('.staffListTextArea').value = staffString}}>Fetch Latest (Reset)</button>
-              <button className='primary' onClick={()=>{localStorage.setItem("staffStringData", document.querySelector('.staffListTextArea').value); resetStaffData(); setSetupModal(false);}}>Apply</button>
-              <button className='destructive' onClick={()=>{setSetupModal(false)}}>Cancel</button>
+              <div className="mainButtons">
+                <button className='primary' onClick={()=>{localStorage.setItem("staffStringData", document.querySelector('.staffListTextArea').value); resetStaffData(); setSetupModal(false);}}>Apply</button>
+                <button className='destructive' onClick={()=>{setSetupModal(false)}}>Cancel</button>
+              </div>
             </div>
             
 
@@ -415,11 +418,14 @@ export default function App() {
         <div className={"modalOverlay "+(formatModal ? "active" : "inactive")}>
           <div className="modalCard">
             <p className="title"><Icon icon={"hugeicons:document-validation"} className='copyIcon' />  Attendance Format</p>
+            <p className="tinyhint">To use latest, click "Fetch Latest" then "Apply"</p>
             <textarea className='staffListTextArea' name="" id="" defaultValue={localStorage.getItem("attendanceFormatData")}></textarea>
             <div className="setupActions">
               <button className='' onClick={()=>{document.querySelector('.staffListTextArea').value = attendanceFormat}}>Fetch Latest (Reset)</button>
-              <button className='primary' onClick={()=>{localStorage.setItem("attendanceFormatData", document.querySelector('.staffListTextArea').value); setFormatModal(false);}}>Apply</button>
-              <button className='destructive' onClick={()=>{setFormatModal(false)}}>Cancel</button>
+              <div className="mainButtons">
+                <button className='primary' onClick={()=>{localStorage.setItem("attendanceFormatData", document.querySelector('.staffListTextArea').value); setFormatModal(false);}}>Apply</button>
+                <button className='destructive' onClick={()=>{setFormatModal(false)}}>Cancel</button>
+              </div>
             </div>
             
 
@@ -434,7 +440,7 @@ export default function App() {
           <div className="modalCard">
             <p className="title"><Icon icon={"hugeicons:document-validation"} className='copyIcon' />  Fill from Text</p>
             <textarea className='staffListTextArea' name="" id="" placeholder='Paste existing attendance here...'></textarea>
-            <div className="setupActions">
+            <div className="mainButtons">
               <button className='primary' onClick={()=>{mergeAttendance(document.querySelector('.staffListTextArea').value); setFillModal(false); window.location.reload();}}>Apply</button>
               <button className='destructive' onClick={()=>{setFillModal(false)}}>Cancel</button>
             </div>

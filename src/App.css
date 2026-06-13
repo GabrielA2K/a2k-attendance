@@ -389,7 +389,7 @@ p.title {
 
 .staffListTextArea {
   width: 100%;
-  height: 24rem;
+  height: 20rem;
   background-color: var(--background-secondary);
   border-radius: 0.8rem;
   padding: 1rem;
@@ -456,6 +456,52 @@ button.spillButton {
 button.theme {
   flex-grow: 0;
   padding-inline: 1rem;
+}
+
+button.attention {
+  border: 1px dashed var(--orange);
+  /* color: var(--red); */
+  position: relative;
+}
+
+button.format-attention::after {
+  color: var(--orange);
+  position: absolute;
+  top: -1.1rem;
+  font-size: 0.7rem;
+  font-style: italic;
+  content: 'Using custom/outdated format';
+  font-weight: 400;
+}
+button.staff-attention::after {
+  color: var(--orange);
+  position: absolute;
+  top: -1.1rem;
+  font-size: 0.7rem;
+  font-style: italic;
+  content: 'Custom/Outdated';
+  font-weight: 400;
+}
+p.tinyhint {
+  font-size: 0.7rem;
+  font-style: italic;
+  margin-top: -0.5rem;
+  margin-left: 2rem;
+  color: rgb(from var(--text-primary) r g b / 0.7);
+}
+
+.mainButtons {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 0;
+}
+.mainButtons > button {
+  padding-inline: 2rem;
+}
+.mainButtons > button:first-child {
+  flex-grow: 1;
 }
 
 @media only screen and (max-width: 600px) {

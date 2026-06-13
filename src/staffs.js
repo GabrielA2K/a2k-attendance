@@ -11,7 +11,7 @@ export const staffs = {
       leaveType: "",
     },
     {
-      name: "Daniel Jimenez",
+      name: "--",
       position: "CEO",
       status: "Left",
       timeIn: "",
@@ -35,8 +35,8 @@ export const staffs = {
       leaveType: "",
     },
     {
-      name: "Ma. Ronna Silos",
-      position: "CFO",
+      name: "Elsa Layson",
+      position: "",
       status: "Left",
       timeIn: "",
       reason: "",
@@ -44,7 +44,7 @@ export const staffs = {
     },
     {
       name: "Charlotte Bondoc",
-      position: "CPO, CTO",
+      position: "CPTO",
       status: "Left",
       timeIn: "",
       reason: "",
@@ -54,7 +54,7 @@ export const staffs = {
   others: [],
   dataVersion: [
     {
-      version: "1.0.27",
+      version: "1.0.32",
       name: "",
       status: "Left",
       timeIn: "",
@@ -75,14 +75,14 @@ Assistant Developers/Designers (P={AstD_P}/A={AstD_A}/TO=0/WFH={AstD_WFH}/OS={As
 Associate Developers/Designers (P={AD_P}/A={AD_A}/TO=0/WFH={AD_WFH}/OS={AD_OS})
 {AD_LIST}
 
-Software Developers/Designers (P={SD_P}/L={SD_L}/TO={SD_TO}/WFH={SD_WFH}/OS={SD_OS})
+QAs/Software Developers/Designers (P={SD_P}/L={SD_L}/TO={SD_TO}/WFH={SD_WFH}/OS={SD_OS})
 {SD_LIST}  
 
 Project Leaders (P={PL_P}/L={PL_L}/TO={PL_TO}/WFH={PL_WFH}/OS={PL_OS})
 
-Reporting to CTO
+Reporting to CPTO
 
-*IT Support & Admin Leads (P={RCTO_P}/L={RCTO_L}/TO={RCTO_TO}/WFH={RCTO_WFH}/OS={RCTO_OS})
+*DSO & HR Managers (P={RCTO_P}/L={RCTO_L}/TO={RCTO_TO}/WFH={RCTO_WFH}/OS={RCTO_OS})
 {RCTO_LIST}
 
 *Reporting to Executives
@@ -106,10 +106,12 @@ Overall Office: {P_Count}`;
 export const staffString = `[OnTheJobTrainees]
 
 [AssistantDevelopers]
+Ken Manalo
 
 [AssociateDevelopers]
 
 [SoftwareDevelopersDesigners]
+Bryan Angelo Maniaul
 Mc Karl Kennedy Javier
 Jose Gabriel Castillo
 Tristan Santos
