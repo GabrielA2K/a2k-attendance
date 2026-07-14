@@ -104,9 +104,13 @@ Overall WFH: {WFH_Count}
 Overall Office: {P_Count}`;
 
 export const staffString = `[OnTheJobTrainees]
+Ericka Gavino
+Carla Joves
+Chean Valencia
 
 [AssistantDevelopers]
 Ken Manalo
+Siegrid Everdone
 
 [AssociateDevelopers]
 
