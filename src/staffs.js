@@ -107,6 +107,7 @@ export const staffString = `[OnTheJobTrainees]
 Ericka Gavino
 Carla Joves
 Chean Valencia
+Alexander Manabat
 
 [AssistantDevelopers]
 Ken Manalo
