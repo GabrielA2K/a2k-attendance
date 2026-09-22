@@ -110,7 +110,6 @@ Chean Valencia
 Alexander Manabat
 
 [AssistantDevelopers]
-Ken Manalo
 Siegrid Everdone
 
 [AssociateDevelopers]
